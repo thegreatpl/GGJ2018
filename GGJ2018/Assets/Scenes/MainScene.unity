@@ -249,6 +249,18 @@ MonoBehaviour:
   Base: {fileID: 100086517}
   Walls: {fileID: 935365084}
   Detail: {fileID: 599680028}
+  XSize: 100
+  YSize: 100
+  Tiles:
+  - Name: Grass
+    Type: Grass
+    tileBase: {fileID: 11400000, guid: 796ddc2e6632d1b4ab58a01eaa14e89e, type: 2}
+  - Name: Wall
+    Type: Wall
+    tileBase: {fileID: 11400000, guid: c332aeb2361f9c84aa6ffd30e75baf78, type: 2}
+  - Name: Road
+    Type: Road
+    tileBase: {fileID: 11400000, guid: ff5e493eb6645e14f9c6cd0fd6ebdbdd, type: 2}
 --- !u!4 &469431055
 Transform:
   m_ObjectHideFlags: 0
@@ -406,7 +418,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -472,7 +484,7 @@ Grid:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 668000130}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
+  m_CellSize: {x: 0.32, y: 0.32, z: 0}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -569,7 +581,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
