@@ -616,6 +616,12 @@ MonoBehaviour:
   - Name: BRWallDetail
     Type: BRWallDetail
     tileBase: {fileID: 11400000, guid: 35240be4a4d080949baf761b3471b7f5, type: 2}
+  - Name: cobble1
+    Type: Cobble
+    tileBase: {fileID: 11400000, guid: 4204ca32408543f4a8f43fe0feb033c2, type: 2}
+  - Name: cobble2
+    Type: Cobble
+    tileBase: {fileID: 11400000, guid: 054f3b2ab7aea3e418f88d17068eb1dc, type: 2}
   BuildingDefs:
   - X: -374
     Y: -91

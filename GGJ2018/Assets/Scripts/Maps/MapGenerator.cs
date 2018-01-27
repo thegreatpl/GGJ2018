@@ -92,7 +92,7 @@ public class MapGenerator : MonoBehaviour {
     {
         var grasses = Tiles.Where(x => x.Type == "Grass");
         var walls = Tiles.Where(x => x.Type == "Wall");
-
+        var cobbles = Tiles.Where(x => x.Type == "Cobble"); 
 
         var NSWall = Tiles.Where(x => x.Type == "NSWall");
         var EWWall = Tiles.Where(x => x.Type == "EWWall");
@@ -104,13 +104,23 @@ public class MapGenerator : MonoBehaviour {
         var BLWall = Tiles.Where(x => x.Type == "BLWall");
         var BLWallDetail = Tiles.Where(x => x.Type == "BLWallDetail");
         var BRWall = Tiles.Where(x => x.Type == "BRWall");
-        var BRWallDetail = Tiles.Where(x => x.Type == "BRWallDetail"); 
+        var BRWallDetail = Tiles.Where(x => x.Type == "BRWallDetail");
 
-        for (int xdx = 0; xdx <= XSize; xdx++)
+        int surroundings = 20; 
+
+        for (int xdx = -surroundings; xdx <= XSize + surroundings; xdx++)
         {
-            for (int ydx = 0; ydx <= YSize; ydx++)
+            for (int ydx = -surroundings; ydx <= YSize + surroundings; ydx++)
             {
-                Base.SetTile(new Vector3Int(xdx, ydx, 0), grasses.ElementAt(Random.Range(0, grasses.Count())).tileBase);
+                if (xdx >= 0 && xdx <= XSize && ydx >= 0 && ydx <= YSize)
+                {
+                    Base.SetTile(new Vector3Int(xdx, ydx, 0), cobbles.ElementAt(Random.Range(0, cobbles.Count())).tileBase);
+                }
+                else
+                {
+                    Base.SetTile(new Vector3Int(xdx, ydx, 0), grasses.ElementAt(Random.Range(0, grasses.Count())).tileBase);
+                    continue; 
+                }
 
                 if (xdx == 0 || xdx == XSize)
                 {
