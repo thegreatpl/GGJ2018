@@ -14,10 +14,16 @@ public class SpawnerController : MonoBehaviour {
 
     public List<GameObject> CivilianPrefabs;
 
+
+    public List<GameObject> Civilians = new List<GameObject>(); 
+
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
     /// </summary>
-    public float SpawnChance = 0.1f; 
+    public float SpawnChance = 0.1f;
+
+
+    public int MaxCivilians = 500; 
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +35,7 @@ public class SpawnerController : MonoBehaviour {
         if (CivilianPrefabs.Count < 1)
             return; 
 
-        if (Random.value <= SpawnChance)
+        if (Random.value <= SpawnChance && Civilians.Count < MaxCivilians)
         {
             SpawnObject(SpawnPoints.RandomElement(), CivilianPrefabs.RandomElement()); 
         }
@@ -45,10 +51,13 @@ public class SpawnerController : MonoBehaviour {
     {
         var spawnLoc = MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation);
         var newObj = Instantiate(prefab, spawnLoc, prefab.transform.rotation);
-        spawn.Spawn(newObj); 
+        spawn.Spawn(newObj);
+        Civilians.Add(newObj); 
     }
 
-
+    /// <summary>
+    /// Finds all the doors and creates spawns from them. 
+    /// </summary>
     public void FindDoorSpawns()
     {
         var detail = MapGenerator.Walls;

@@ -1542,8 +1542,8 @@ MonoBehaviour:
   Base: {fileID: 100086517}
   Walls: {fileID: 935365084}
   Detail: {fileID: 599680028}
-  XSize: 100
-  YSize: 100
+  XSize: 50
+  YSize: 50
   RoadWidth: 3
   MaxRoadLength: 10
   Tiles:
@@ -1759,7 +1759,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64cdab2c0de1af44fb3be817693285bc, type: 2}
   CivilianPrefabs:
   - {fileID: 1319485422419164, guid: 6443008089448b4418030680b4cbd301, type: 2}
+  Civilians: []
   SpawnChance: 0.1
+  MaxCivilians: 500
 --- !u!1 &478079215
 GameObject:
   m_ObjectHideFlags: 0
