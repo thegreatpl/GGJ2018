@@ -9,7 +9,15 @@ public class SpawnerController : MonoBehaviour {
 
     public List<SpawnPoint> SpawnPoints = new List<SpawnPoint>();
 
-    public List<TileBase> DoorTiles; 
+    public List<TileBase> DoorTiles;
+
+
+    public List<GameObject> CivilianPrefabs;
+
+    /// <summary>
+    /// Chance a civilian will be spawned in a tick. 
+    /// </summary>
+    public float SpawnChance = 0.1f; 
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +26,13 @@ public class SpawnerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (CivilianPrefabs.Count < 1)
+            return; 
+
+        if (Random.value <= SpawnChance)
+        {
+            SpawnObject(SpawnPoints.RandomElement(), CivilianPrefabs.RandomElement()); 
+        }
 	}
 
 
@@ -29,7 +43,7 @@ public class SpawnerController : MonoBehaviour {
     /// <param name="prefab"></param>
     public void SpawnObject(SpawnPoint spawn, GameObject prefab)
     {
-        var spawnLoc = MapGenerator.Base.CellToWorld(spawn.SpawnLocation);
+        var spawnLoc = MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation);
         var newObj = Instantiate(prefab, spawnLoc, prefab.transform.rotation);
         spawn.Spawn(newObj); 
     }
