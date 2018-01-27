@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InfectBulletScript : MonoBehaviour {
+    /// <summary>
+    /// The spawner. 
+    /// </summary>
+    public static SpawnerController SpawnerController; 
 
     public Vector3 Velocity = Vector3.zero;
 
     public int Faction = 0; 
 
     public int Life = 100;
+
+    /// <summary>
+    /// How much damage this bullet does. 
+    /// </summary>
+    public int Damage = 1; 
 
     /// <summary>
     /// How fast the bullet flies. 
@@ -23,8 +32,8 @@ public class InfectBulletScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //kill it. 
-        //if (Life < 0)
-        //    Destroy(gameObject);
+        if (Life < 0)
+            Destroy(gameObject);
 
         transform.position += Velocity; 
 
@@ -41,9 +50,15 @@ public class InfectBulletScript : MonoBehaviour {
             return; 
         }
 
-        if (owner.Faction != Faction)
+        if (owner.Faction != Faction && owner.Type == EntityType.Civilian)
         {
-            SpawnZombie(collision.gameObject); 
+            SpawnerController.SpawnZombie(Faction, collision.gameObject); 
+            Destroy(gameObject); 
+        }
+        else if (owner.Faction != Faction)
+        {
+            owner.HP -= Damage;
+            Destroy(gameObject); 
         }
         else
         {

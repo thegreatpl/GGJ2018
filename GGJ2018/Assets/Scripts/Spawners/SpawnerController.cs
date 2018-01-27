@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,7 +16,17 @@ public class SpawnerController : MonoBehaviour {
     public List<GameObject> CivilianPrefabs;
 
 
-    public List<GameObject> Civilians = new List<GameObject>(); 
+    public List<GameObject> Civilians = new List<GameObject>();
+
+    /// <summary>
+    /// Zombies list. 
+    /// </summary>
+    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
+
+    /// <summary>
+    /// List of all the zombies. 
+    /// </summary>
+    public List<GameObject> LivingZombies = new List<GameObject>(); 
 
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
@@ -28,10 +39,18 @@ public class SpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         MapGenerator = GetComponent<MapGenerator>();
+        InfectBulletScript.SpawnerController = this;
+        ZombieAI.SpawnerController = this; 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Unity overloads the == operator so destroyed objects equal null. 
+        LivingZombies.RemoveAll(x => x == null);
+        Civilians.RemoveAll(x => x == null); 
+
+
+
         if (CivilianPrefabs.Count < 1)
             return; 
 
@@ -91,5 +110,21 @@ public class SpawnerController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Spawns a zombie at the position of the civilian. 
+    /// </summary>
+    /// <param name="faction"></param>
+    /// <param name="civilian"></param>
+    public void SpawnZombie(int faction, GameObject civilian)
+    {
+        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
+        var pos = civilian.transform.position;
+        Destroy(civilian);
+        var zom = Instantiate(zombie.Prefab, pos, zombie.Prefab.transform.rotation);
+        var owner = zom.GetComponent<EntityOwnership>();
+        owner.Faction = faction;
+        LivingZombies.Add(zom); 
     }
 }
