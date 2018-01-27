@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 95111779379247612}
   - component: {fileID: 114929015604219356}
   - component: {fileID: 114135989456882354}
+  - component: {fileID: 114382168979111492}
   m_Layer: 0
   m_Name: ZombieWhite
   m_TagString: Untagged
@@ -119,8 +120,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 0
-  Type: Zombie
+  Type: 1
   HP: 5
+--- !u!114 &114382168979111492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462909968946030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2ee7ca8cc316d4a809d63724b76b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangeDirectionChance: 0.2
+  SightRange: 20
+  ChanceToGoForStrongest: 0.3
 --- !u!114 &114929015604219356
 MonoBehaviour:
   m_ObjectHideFlags: 1

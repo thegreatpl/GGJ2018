@@ -21,7 +21,12 @@ public class SpawnerController : MonoBehaviour {
     /// <summary>
     /// Zombies list. 
     /// </summary>
-    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>(); 
+    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
+
+    /// <summary>
+    /// List of all the zombies. 
+    /// </summary>
+    public List<GameObject> LivingZombies = new List<GameObject>(); 
 
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
@@ -34,11 +39,18 @@ public class SpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         MapGenerator = GetComponent<MapGenerator>();
-        InfectBulletScript.SpawnerController = this; 
+        InfectBulletScript.SpawnerController = this;
+        ZombieAI.SpawnerController = this; 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        //Unity overloads the == operator so destroyed objects equal null. 
+        LivingZombies.RemoveAll(x => x == null);
+        Civilians.RemoveAll(x => x == null); 
+
+
+
         if (CivilianPrefabs.Count < 1)
             return; 
 
@@ -112,6 +124,7 @@ public class SpawnerController : MonoBehaviour {
         Destroy(civilian);
         var zom = Instantiate(zombie.Prefab, pos, zombie.Prefab.transform.rotation);
         var owner = zom.GetComponent<EntityOwnership>();
-        owner.Faction = faction; 
+        owner.Faction = faction;
+        LivingZombies.Add(zom); 
     }
 }

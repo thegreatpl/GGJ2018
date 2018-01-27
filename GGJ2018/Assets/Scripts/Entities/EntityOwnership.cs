@@ -9,7 +9,7 @@ public class EntityOwnership : MonoBehaviour {
     /// <summary>
     /// The type of this entity. 
     /// </summary>
-    public string Type;
+    public EntityType Type;
 
     /// <summary>
     /// The HP of this entity. 

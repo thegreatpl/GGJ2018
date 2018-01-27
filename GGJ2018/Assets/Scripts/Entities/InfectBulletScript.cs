@@ -50,7 +50,7 @@ public class InfectBulletScript : MonoBehaviour {
             return; 
         }
 
-        if (owner.Faction != Faction && owner.Type == "Civilian")
+        if (owner.Faction != Faction && owner.Type == EntityType.Civilian)
         {
             SpawnerController.SpawnZombie(Faction, collision.gameObject); 
             Destroy(gameObject); 

@@ -189,7 +189,7 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-        FillSpaceWithBuildings(new RectInt(1, 1, XSize - 1, YSize - 1), "house", taken: taken); 
+        FillSpaceWithBuildings(new RectInt(1, 3, XSize - 1, YSize - 3), "house", taken: taken); 
 
     }
 

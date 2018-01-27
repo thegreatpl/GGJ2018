@@ -1769,6 +1769,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
   - Faction: 0
     Prefab: {fileID: 0}
+  LivingZombies: []
   SpawnChance: 0.1
   MaxCivilians: 500
 --- !u!1 &478079215
@@ -4164,7 +4165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 1
-  Type: Player
+  Type: 2
   HP: 1
 --- !u!1 &935365080
 GameObject:
