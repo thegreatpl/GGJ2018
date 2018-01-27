@@ -1721,12 +1721,12 @@ MonoBehaviour:
     Width: 3
     Height: 3
     Type: market
-  - Name: tavern
+  - Name: Tavern
     X: -347
     Y: -74
-    Width: 3
-    Height: 3
-    Type: market
+    Width: 19
+    Height: 7
+    Type: house
 --- !u!4 &469431055
 Transform:
   m_ObjectHideFlags: 0
