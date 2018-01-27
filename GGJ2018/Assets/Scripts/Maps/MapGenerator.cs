@@ -38,12 +38,16 @@ public class MapGenerator : MonoBehaviour {
     public Dictionary<string, TileBase> WallTiles = new Dictionary<string, TileBase>(); 
 
 
-    List<Building> Buildings = new List<Building>(); 
+    List<Building> Buildings = new List<Building>();
+
+    SpawnerController spawner; 
 
 
 	// Use this for initialization
 	void Start () {
-        Building.MapGenerator = this; 
+        Building.MapGenerator = this;
+        spawner = GetComponent<SpawnerController>(); 
+
         LoadBuildings(); 
         GenerateMap();
 	}
@@ -75,8 +79,8 @@ public class MapGenerator : MonoBehaviour {
         GenerateBase();
         // CreateRoads();
 
-        GenerateBuildings(); 
-
+        GenerateBuildings();
+        spawner.FindDoorSpawns(); 
     }
 
     /// <summary>
