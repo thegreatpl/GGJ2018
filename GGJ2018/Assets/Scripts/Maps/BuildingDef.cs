@@ -6,6 +6,8 @@ using System.Text;
 
 public class BuildingDef
 {
+    public string Name; 
+
     public int X;
 
     public int Y;
