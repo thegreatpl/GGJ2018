@@ -27,11 +27,21 @@ public class MapGenerator : MonoBehaviour {
     /// <summary>
     /// List of tiles that can be used to generate the map. 
     /// </summary>
-    public List<TileStoreObj> Tiles = new List<TileStoreObj>(); 
+    public List<TileStoreObj> Tiles = new List<TileStoreObj>();
+
+    /// <summary>
+    /// List of building definations. 
+    /// </summary>
+    public List<BuildingDef> BuildingDefs = new List<BuildingDef>(); 
+
+
+    List<Building> Buildings = new List<Building>(); 
 
 
 	// Use this for initialization
 	void Start () {
+        Building.MapGenerator = this; 
+        LoadBuildings(); 
         GenerateMap();
 	}
 	
@@ -40,6 +50,20 @@ public class MapGenerator : MonoBehaviour {
 		
 	}
 
+    public void LoadBuildings()
+    {
+        foreach(var buildingDef in BuildingDefs)
+        {
+            var building = new Building();
+            RectInt mapPos = new RectInt(buildingDef.X, buildingDef.Y, buildingDef.Width, buildingDef.Height);
+            building.LoadBuilding(mapPos);
+            building.Type = buildingDef.Type;
+            Buildings.Add(building); 
+        }
+    }
+
+
+
     /// <summary>
     /// Generate the basic map. 
     /// </summary>
@@ -47,6 +71,8 @@ public class MapGenerator : MonoBehaviour {
     {
         GenerateBase();
         CreateRoads(); 
+        
+
     }
 
     /// <summary>
@@ -96,8 +122,9 @@ public class MapGenerator : MonoBehaviour {
 
         roadTiles.AddRange(GenerateSquare(center, new Vector2Int(20, 20)));
 
-        
-
+        var building = Buildings.ElementAt(Random.Range(0, Buildings.Count));
+        building.PrintBuilding(center.x, center.y);
+        building.PrintBuilding(center.x + 20, center.y); 
 
     }
 

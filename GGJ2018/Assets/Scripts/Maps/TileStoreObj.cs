@@ -14,11 +14,13 @@ public class TileStoreObj
     /// <summary>
     /// Type of this tile. 
     /// </summary>
-    public string Type; 
+    public string Type;
+
 
     /// <summary>
     /// The tilebase. 
     /// </summary>
     public TileBase tileBase;
+
 
 }
