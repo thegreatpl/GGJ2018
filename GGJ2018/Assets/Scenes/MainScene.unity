@@ -1760,6 +1760,15 @@ MonoBehaviour:
   CivilianPrefabs:
   - {fileID: 1319485422419164, guid: 6443008089448b4418030680b4cbd301, type: 2}
   Civilians: []
+  Zombies:
+  - Faction: 1
+    Prefab: {fileID: 1462909968946030, guid: 10dc13d747f04c948ac7cc7a3e3cffff, type: 2}
+  - Faction: 0
+    Prefab: {fileID: 0}
+  - Faction: 0
+    Prefab: {fileID: 0}
+  - Faction: 0
+    Prefab: {fileID: 0}
   SpawnChance: 0.1
   MaxCivilians: 500
 --- !u!1 &478079215
@@ -4155,6 +4164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 1
+  Type: Player
+  HP: 1
 --- !u!1 &935365080
 GameObject:
   m_ObjectHideFlags: 0

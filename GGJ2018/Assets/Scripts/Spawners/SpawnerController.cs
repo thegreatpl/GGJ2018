@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,7 +16,12 @@ public class SpawnerController : MonoBehaviour {
     public List<GameObject> CivilianPrefabs;
 
 
-    public List<GameObject> Civilians = new List<GameObject>(); 
+    public List<GameObject> Civilians = new List<GameObject>();
+
+    /// <summary>
+    /// Zombies list. 
+    /// </summary>
+    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>(); 
 
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
@@ -28,6 +34,7 @@ public class SpawnerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         MapGenerator = GetComponent<MapGenerator>();
+        InfectBulletScript.SpawnerController = this; 
 	}
 	
 	// Update is called once per frame
@@ -91,5 +98,20 @@ public class SpawnerController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Spawns a zombie at the position of the civilian. 
+    /// </summary>
+    /// <param name="faction"></param>
+    /// <param name="civilian"></param>
+    public void SpawnZombie(int faction, GameObject civilian)
+    {
+        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
+        var pos = civilian.transform.position;
+        Destroy(civilian);
+        var zom = Instantiate(zombie.Prefab, pos, zombie.Prefab.transform.rotation);
+        var owner = zom.GetComponent<EntityOwnership>();
+        owner.Faction = faction; 
     }
 }

@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class EntityOwnership : MonoBehaviour {
 
-    public int Faction; 
+    public int Faction;
+
+    /// <summary>
+    /// The type of this entity. 
+    /// </summary>
+    public string Type;
+
+    /// <summary>
+    /// The HP of this entity. 
+    /// </summary>
+    public int HP;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +23,8 @@ public class EntityOwnership : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //kills the entity. 
+        if (HP < 0)
+            Destroy(gameObject); 
 	}
 }

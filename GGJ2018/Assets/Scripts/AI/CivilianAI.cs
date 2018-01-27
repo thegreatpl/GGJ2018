@@ -18,7 +18,10 @@ public class CivilianAI : MonoBehaviour {
     /// <summary>
     /// Chance to chose a target to more to, as opposed to just wandering randomly. 
     /// </summary>
-    public float MoveChance = 0.3f;
+    public float MoveChance = 0.05f;
+
+
+    public float ChangeDirectionChance = 0.2f; 
 
     // Use this for initialization
     void Start () {
@@ -151,6 +154,16 @@ public class CivilianAI : MonoBehaviour {
     /// </summary>
     void Wander()
     {
+        if (Random.value > ChangeDirectionChance )
+        {
+            if (Movement.Direction != Direction.None && Passable(CurrentTile, Movement.Direction))
+            {
+                //keep moving in that direction. 
+                return; 
+            }
+        }
+
+
         Direction direct = (Direction)Random.Range(1, 5);
 
         if (Passable(CurrentTile, direct))

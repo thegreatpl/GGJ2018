@@ -77,7 +77,7 @@ public class PlyControl : MonoBehaviour {
 
 
             var vel = Vector3.zero.Direction(direct);
-            bulletScript. Velocity = new Vector3(vel.x * bulletScript.BulletSpeed, vel.y * bulletScript.BulletSpeed, 0);
+            bulletScript.Velocity = new Vector3(vel.x * bulletScript.BulletSpeed, vel.y * bulletScript.BulletSpeed, 0);
             bulletScript.Faction = Team.Faction;
            // Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 

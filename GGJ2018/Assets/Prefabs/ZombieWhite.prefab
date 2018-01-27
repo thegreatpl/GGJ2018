@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50078784355065116}
   - component: {fileID: 95111779379247612}
   - component: {fileID: 114929015604219356}
+  - component: {fileID: 114135989456882354}
   m_Layer: 0
   m_Name: ZombieWhite
   m_TagString: Untagged
@@ -106,6 +107,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114135989456882354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462909968946030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3079e7e98fdcdb345bd51970c9bbae06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Faction: 0
+  Type: Zombie
+  HP: 5
 --- !u!114 &114929015604219356
 MonoBehaviour:
   m_ObjectHideFlags: 1
