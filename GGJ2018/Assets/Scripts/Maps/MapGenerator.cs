@@ -32,7 +32,10 @@ public class MapGenerator : MonoBehaviour {
     /// <summary>
     /// List of building definations. 
     /// </summary>
-    public List<BuildingDef> BuildingDefs = new List<BuildingDef>(); 
+    public List<BuildingDef> BuildingDefs = new List<BuildingDef>();
+
+
+    public Dictionary<string, TileBase> WallTiles = new Dictionary<string, TileBase>(); 
 
 
     List<Building> Buildings = new List<Building>(); 
@@ -70,8 +73,15 @@ public class MapGenerator : MonoBehaviour {
     void GenerateMap()
     {
         GenerateBase();
-        CreateRoads(); 
-        
+       // CreateRoads();
+
+        Vector3Int center = new Vector3Int(XSize / 2, YSize / 2, 0);
+        for (int idx = 1; idx < 10; idx++)
+        {
+            int x = idx * 10; 
+            var building = Buildings.ElementAt(Random.Range(0, Buildings.Count));
+            building.PrintBuilding(x, center.y);
+        }
 
     }
 
@@ -81,17 +91,69 @@ public class MapGenerator : MonoBehaviour {
     void GenerateBase()
     {
         var grasses = Tiles.Where(x => x.Type == "Grass");
-        var walls = Tiles.Where(x => x.Type == "Wall"); 
+        var walls = Tiles.Where(x => x.Type == "Wall");
+
+
+        var NSWall = Tiles.Where(x => x.Type == "NSWall");
+        var EWWall = Tiles.Where(x => x.Type == "EWWall");
+        var ESWallDetail = Tiles.Where(x => x.Type == "EWWallDetail");
+        var TopLeftWall = Tiles.Where(x => x.Type == "TLWall");
+        var TLWallDetail = Tiles.Where(x => x.Type == "TLWallDetail");
+        var TRWall = Tiles.Where(x => x.Type == "TRWall");
+        var TRWallDetail = Tiles.Where(x => x.Type == "TRWallDetail");
+        var BLWall = Tiles.Where(x => x.Type == "BLWall");
+        var BLWallDetail = Tiles.Where(x => x.Type == "BLWallDetail");
+        var BRWall = Tiles.Where(x => x.Type == "BRWall");
+        var BRWallDetail = Tiles.Where(x => x.Type == "BRWallDetail"); 
 
         for (int xdx = 0; xdx <= XSize; xdx++)
         {
             for (int ydx = 0; ydx <= YSize; ydx++)
             {
                 Base.SetTile(new Vector3Int(xdx, ydx, 0), grasses.ElementAt(Random.Range(0, grasses.Count())).tileBase);
-                if (xdx == 0 || ydx == 0 || XSize == xdx || YSize == ydx)
+
+                if (xdx == 0 || xdx == XSize)
                 {
-                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), walls.ElementAt(Random.Range(0, walls.Count())).tileBase); 
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), NSWall.ElementAt(Random.Range(0, NSWall.Count())).tileBase);
                 }
+                if (ydx == 0 || ydx == YSize)
+                {
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), EWWall.ElementAt(Random.Range(0, EWWall.Count())).tileBase);
+                    Detail.SetTile(new Vector3Int(xdx, ydx + 1, 0), ESWallDetail.ElementAt(Random.Range(0, ESWallDetail.Count())).tileBase);
+                }
+
+                //bottom left. 
+                if (ydx == 0 && xdx == 0)
+                {
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), BLWall.ElementAt(Random.Range(0, BLWall.Count())).tileBase);
+                    Detail.SetTile(new Vector3Int(xdx, ydx + 1, 0), BLWallDetail.ElementAt(Random.Range(0, BLWallDetail.Count())).tileBase);
+                }
+                //bottom right
+                else if (ydx == 0 && xdx == XSize)
+                {
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), BRWall.ElementAt(Random.Range(0, BRWall.Count())).tileBase);
+                    Detail.SetTile(new Vector3Int(xdx, ydx + 1, 0), BRWallDetail.ElementAt(Random.Range(0, BRWallDetail.Count())).tileBase);
+
+                }
+                //top left
+                else if (ydx == YSize && xdx == 0)
+                {
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), TopLeftWall.ElementAt(Random.Range(0, TopLeftWall.Count())).tileBase);
+                    Detail.SetTile(new Vector3Int(xdx, ydx + 1, 0), TLWallDetail.ElementAt(Random.Range(0, TLWallDetail.Count())).tileBase);
+
+                }
+                //top right. 
+                else if (ydx == YSize && xdx == XSize)
+                {
+                    Walls.SetTile(new Vector3Int(xdx, ydx, 0), TRWall.ElementAt(Random.Range(0, TRWall.Count())).tileBase);
+                    Detail.SetTile(new Vector3Int(xdx, ydx + 1, 0), TRWallDetail.ElementAt(Random.Range(0, TRWallDetail.Count())).tileBase);
+
+                }
+
+                //if (xdx == 0 || ydx == 0 || XSize == xdx || YSize == ydx)
+                //{
+                //    Walls.SetTile(new Vector3Int(xdx, ydx, 0), walls.ElementAt(Random.Range(0, walls.Count())).tileBase); 
+                //}
 
             }
         }
@@ -122,9 +184,7 @@ public class MapGenerator : MonoBehaviour {
 
         roadTiles.AddRange(GenerateSquare(center, new Vector2Int(20, 20)));
 
-        var building = Buildings.ElementAt(Random.Range(0, Buildings.Count));
-        building.PrintBuilding(center.x, center.y);
-        building.PrintBuilding(center.x + 20, center.y); 
+
 
     }
 
