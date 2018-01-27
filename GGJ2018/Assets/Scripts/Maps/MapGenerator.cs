@@ -38,12 +38,17 @@ public class MapGenerator : MonoBehaviour {
     public Dictionary<string, TileBase> WallTiles = new Dictionary<string, TileBase>(); 
 
 
-    List<Building> Buildings = new List<Building>(); 
+    List<Building> Buildings = new List<Building>();
+
+    SpawnerController spawner; 
 
 
 	// Use this for initialization
 	void Start () {
-        Building.MapGenerator = this; 
+        Building.MapGenerator = this;
+        CivilianAI.MapGenerator = this; 
+        spawner = GetComponent<SpawnerController>(); 
+
         LoadBuildings(); 
         GenerateMap();
 	}
@@ -75,8 +80,8 @@ public class MapGenerator : MonoBehaviour {
         GenerateBase();
         // CreateRoads();
 
-        GenerateBuildings(); 
-
+        GenerateBuildings();
+        spawner.FindDoorSpawns(); 
     }
 
     /// <summary>
@@ -184,7 +189,7 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-        FillSpaceWithBuildings(new RectInt(1, 1, XSize - 1, YSize - 1), "house", taken: taken); 
+        FillSpaceWithBuildings(new RectInt(1, 3, XSize - 1, YSize - 3), "house", taken: taken); 
 
     }
 

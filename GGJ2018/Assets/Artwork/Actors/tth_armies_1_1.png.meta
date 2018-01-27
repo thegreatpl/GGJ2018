@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9820953401d9653478d390e65ff5fa56
-timeCreated: 1517005745
+timeCreated: 1517067282
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,9 +13,9 @@ TextureImporter:
     21300012: tth_armies_1_1_6
     21300014: tth_armies_1_1_7
     21300016: tth_armies_1_1_8
-    21300018: tth_armies_1_1_9
-    21300020: tth_armies_1_1_10
-    21300022: tth_armies_1_1_11
+    21300018: ZomWhiteRight1
+    21300020: ZomWhiteRight2
+    21300022: ZomWhiteRight3
     21300024: tth_armies_1_1_12
     21300026: tth_armies_1_1_13
     21300028: tth_armies_1_1_14
@@ -37,9 +37,9 @@ TextureImporter:
     21300060: tth_armies_1_1_30
     21300062: tth_armies_1_1_31
     21300064: tth_armies_1_1_32
-    21300066: tth_armies_1_1_33
-    21300068: tth_armies_1_1_34
-    21300070: tth_armies_1_1_35
+    21300066: ZomWhiteDown1
+    21300068: ZomWhiteDown2
+    21300070: ZomWhiteDown3
     21300072: tth_armies_1_1_36
     21300074: tth_armies_1_1_37
     21300076: tth_armies_1_1_38
@@ -61,9 +61,9 @@ TextureImporter:
     21300108: tth_armies_1_1_54
     21300110: tth_armies_1_1_55
     21300112: tth_armies_1_1_56
-    21300114: tth_armies_1_1_57
-    21300116: tth_armies_1_1_58
-    21300118: tth_armies_1_1_59
+    21300114: ZomWhiteUp1
+    21300116: ZomWhiteUp2
+    21300118: ZomWhiteUp3
     21300120: tth_armies_1_1_60
     21300122: tth_armies_1_1_61
     21300124: tth_armies_1_1_62
@@ -514,9 +514,9 @@ TextureImporter:
     21301014: tth_armies_1_1_507
     21301016: tth_armies_1_1_508
     21301018: tth_armies_1_1_509
-    21301020: tth_armies_1_1_510
-    21301022: tth_armies_1_1_511
-    21301024: tth_armies_1_1_512
+    21301020: CivARight1
+    21301022: CivARight2
+    21301024: CivARight3
     21301026: tth_armies_1_1_513
     21301028: tth_armies_1_1_514
     21301030: tth_armies_1_1_515
@@ -550,9 +550,9 @@ TextureImporter:
     21301086: tth_armies_1_1_543
     21301088: tth_armies_1_1_544
     21301090: tth_armies_1_1_545
-    21301092: tth_armies_1_1_546
-    21301094: tth_armies_1_1_547
-    21301096: tth_armies_1_1_548
+    21301092: CivADown1
+    21301094: CivADown2
+    21301096: CivADown3
     21301098: tth_armies_1_1_549
     21301100: tth_armies_1_1_550
     21301102: tth_armies_1_1_551
@@ -586,9 +586,9 @@ TextureImporter:
     21301158: tth_armies_1_1_579
     21301160: tth_armies_1_1_580
     21301162: tth_armies_1_1_581
-    21301164: tth_armies_1_1_582
-    21301166: tth_armies_1_1_583
-    21301168: tth_armies_1_1_584
+    21301164: CivAUp1
+    21301166: CivAUp2
+    21301168: CivAUp3
     21301170: tth_armies_1_1_585
     21301172: tth_armies_1_1_586
     21301174: tth_armies_1_1_587
@@ -997,13 +997,13 @@ TextureImporter:
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
-    mipMapMode: 0
+    mipMapMode: 1
     enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
+    mipMapsPreserveCoverage: 1
     alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
@@ -1031,7 +1031,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -1047,20 +1047,20 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -1196,7 +1196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_9
+      name: ZomWhiteRight1
       rect:
         serializedVersion: 2
         x: 144
@@ -1210,7 +1210,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_10
+      name: ZomWhiteRight2
       rect:
         serializedVersion: 2
         x: 160
@@ -1224,7 +1224,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_11
+      name: ZomWhiteRight3
       rect:
         serializedVersion: 2
         x: 176
@@ -1532,7 +1532,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_33
+      name: ZomWhiteDown1
       rect:
         serializedVersion: 2
         x: 144
@@ -1546,7 +1546,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_34
+      name: ZomWhiteDown2
       rect:
         serializedVersion: 2
         x: 160
@@ -1560,7 +1560,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_35
+      name: ZomWhiteDown3
       rect:
         serializedVersion: 2
         x: 176
@@ -1868,7 +1868,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_57
+      name: ZomWhiteUp1
       rect:
         serializedVersion: 2
         x: 144
@@ -1882,7 +1882,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_58
+      name: ZomWhiteUp2
       rect:
         serializedVersion: 2
         x: 160
@@ -1896,7 +1896,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_59
+      name: ZomWhiteUp3
       rect:
         serializedVersion: 2
         x: 176
@@ -8210,7 +8210,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_510
+      name: CivARight1
       rect:
         serializedVersion: 2
         x: 96
@@ -8224,7 +8224,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_511
+      name: CivARight2
       rect:
         serializedVersion: 2
         x: 112
@@ -8238,7 +8238,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_512
+      name: CivARight3
       rect:
         serializedVersion: 2
         x: 128
@@ -8714,7 +8714,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_546
+      name: CivADown1
       rect:
         serializedVersion: 2
         x: 96
@@ -8728,7 +8728,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_547
+      name: CivADown2
       rect:
         serializedVersion: 2
         x: 112
@@ -8742,7 +8742,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_548
+      name: CivADown3
       rect:
         serializedVersion: 2
         x: 128
@@ -9218,7 +9218,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_582
+      name: CivAUp1
       rect:
         serializedVersion: 2
         x: 96
@@ -9232,7 +9232,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_583
+      name: CivAUp2
       rect:
         serializedVersion: 2
         x: 112
@@ -9246,7 +9246,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: tth_armies_1_1_584
+      name: CivAUp3
       rect:
         serializedVersion: 2
         x: 128
@@ -11713,7 +11713,7 @@ TextureImporter:
       name: WhiteHeroDown2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 255
         y: 160
         width: 16
         height: 16
