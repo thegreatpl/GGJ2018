@@ -15,7 +15,9 @@ public class SpawnerController : MonoBehaviour {
 
     public List<GameObject> CivilianPrefabs;
 
+    public int CiviliansCount { get { return Civilians.Count; } }
 
+    [HideInInspector]
     public List<GameObject> Civilians = new List<GameObject>();
 
     /// <summary>
@@ -23,9 +25,12 @@ public class SpawnerController : MonoBehaviour {
     /// </summary>
     public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
 
+    public int ZombiesCount { get { return LivingZombies.Count; } }
+
     /// <summary>
     /// List of all the zombies. 
     /// </summary>
+    [HideInInspector]
     public List<GameObject> LivingZombies = new List<GameObject>(); 
 
     /// <summary>

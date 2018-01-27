@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CivilianAI : BaseAI {
@@ -11,6 +12,7 @@ public class CivilianAI : BaseAI {
     /// </summary>
     public float MoveChance = 0.05f;
 
+    public float SightRange = 0.7f; 
 
 
     // Use this for initialization
@@ -22,6 +24,9 @@ public class CivilianAI : BaseAI {
     // Update is called once per frame
     void Update () {
         CurrentTile = MapGenerator.Base.WorldToCell(transform.position);
+
+        if (Flee())
+            return; 
 
         if (TargetTile == Vector3Int.zero)
         {
@@ -37,6 +42,28 @@ public class CivilianAI : BaseAI {
 
         BaseUpdate(); 
 	}
+
+
+    bool Flee()
+    {
+        var view = Physics2D.OverlapCircleAll(transform.position, SightRange).Select(x => new TargetCheck(x.gameObject));
+
+        var zombs = view.Where(x => x.EntityOwnership?.Type == EntityType.Zombie);
+
+        if (zombs.Count() < 1)
+            return false;
+
+        var direction = new Vector3(0, 0); 
+        foreach (var z in zombs)
+        {
+            var d = transform.position - z.GameObject.transform.position;
+            direction += d; 
+        }
+
+        //direction *= -1;
+        MoveInDirection(direction); 
+        return true; 
+    }
 
 
 }

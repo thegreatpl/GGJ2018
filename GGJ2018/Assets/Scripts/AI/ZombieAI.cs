@@ -13,8 +13,15 @@ public class ZombieAI : BaseAI {
 
     public float SightRange = 20;
 
+    /// <summary>
+    /// How far away they have to be to attack them. 
+    /// </summary>
+    public float AttackRadius = 1f; 
 
-    public float ChanceToGoForStrongest = 0.3f; 
+
+    public float ChanceToGoForStrongest = 0.3f;
+
+    public int AttackVal = 1; 
 
 	// Use this for initialization
 	void Start () {
@@ -89,6 +96,18 @@ public class ZombieAI : BaseAI {
 
     protected void Attack()
     {
+        var distance = Vector3.Distance(transform.position, Target.transform.position);
 
+        if (distance > AttackRadius)
+            return;
+
+        var otherOwner = Target.GetComponent<EntityOwnership>(); 
+        if (otherOwner.Type == EntityType.Civilian)
+        {
+            SpawnerController.SpawnZombie(Ownership.Faction, Target);
+            return; 
+        }
+
+        otherOwner.HP -= AttackVal; 
     }
 }

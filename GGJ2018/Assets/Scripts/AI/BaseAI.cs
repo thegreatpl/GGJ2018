@@ -185,11 +185,65 @@ public class BaseAI : MonoBehaviour {
     }
 
     /// <summary>
-    /// Whether or not a tile is passable. 
+    /// Moves in the direction given. 
     /// </summary>
-    /// <param name="tilePos"></param>
-    /// <returns></returns>
-    protected bool Passable(Vector3Int tilePos)
+    /// <param name="direction"></param>
+    protected void MoveInDirection(Vector3 direction)
+    {
+        float xMovement, yMovement;
+        Direction xDirect, yDirect;
+        if (direction.x < 0)
+        {
+            xMovement = direction.x * -1;
+            xDirect = Direction.West;
+        }
+        else
+        {
+            xMovement = direction.x;
+            xDirect = Direction.East;
+        }
+
+        if (direction.y < 0)
+        {
+            yMovement = direction.y * -1;
+            yDirect = Direction.South;
+        }
+        else
+        {
+            yMovement = direction.y;
+            yDirect = Direction.North;
+        }
+
+        if (xMovement > yMovement && Passable(CurrentTile, xDirect))
+        { 
+            Movement.Direction = xDirect;
+            return; 
+        }
+        if (yMovement > xMovement && Passable(CurrentTile, yDirect))
+        {
+            Movement.Direction = yDirect;
+            return; 
+        }
+        if (yMovement == xMovement)
+        {
+            if (Random.value < 0.5f)
+                Movement.Direction = xDirect;
+            else
+                Movement.Direction = yDirect;
+
+            return; 
+        }
+
+        Wander(); 
+
+    }
+
+        /// <summary>
+        /// Whether or not a tile is passable. 
+        /// </summary>
+        /// <param name="tilePos"></param>
+        /// <returns></returns>
+        protected bool Passable(Vector3Int tilePos)
     {
         return !MapGenerator.Walls.HasTile(tilePos);
     }
