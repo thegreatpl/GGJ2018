@@ -46,6 +46,7 @@ public class MapGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Building.MapGenerator = this;
+        CivilianAI.MapGenerator = this; 
         spawner = GetComponent<SpawnerController>(); 
 
         LoadBuildings(); 

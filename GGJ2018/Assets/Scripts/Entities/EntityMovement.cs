@@ -32,26 +32,26 @@ public class EntityMovement : MonoBehaviour {
             case Direction.West:
                 VisualControl.SetInteger("Direction", 3);
                 VisualControl.SetBool("Walk", true);
-                transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
+                transform.position += new Vector3(-Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.East:
 
                 VisualControl.SetInteger("Direction", 4);
                 VisualControl.SetBool("Walk", true);
-                transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
+                transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.South:
                 VisualControl.SetInteger("Direction", 2);
                 VisualControl.SetBool("Walk", true);
-                transform.position += new Vector3(0, -1, 0) * Time.deltaTime;
+                transform.position += new Vector3(0, -Speed, 0) * Time.deltaTime;
                 break;
 
             case Direction.North:
                 VisualControl.SetInteger("Direction", 1);
                 VisualControl.SetBool("Walk", true);
-                transform.position += new Vector3(0, 1, 0) * Time.deltaTime;
+                transform.position += new Vector3(0, Speed, 0) * Time.deltaTime;
                 break;
 
             default:
