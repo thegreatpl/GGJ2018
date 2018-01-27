@@ -176,7 +176,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -3985,6 +3985,7 @@ GameObject:
   - component: {fileID: 919080276}
   - component: {fileID: 919080277}
   - component: {fileID: 919080278}
+  - component: {fileID: 919080279}
   m_Layer: 0
   m_Name: WhitePlayer
   m_TagString: Untagged
@@ -4081,6 +4082,9 @@ MonoBehaviour:
   Horizontal: Horizontal
   Vertical: Vertical
   Fire: Fire1
+  Color: {r: 0, g: 0, b: 0, a: 0}
+  InfectBullet: {fileID: 1847404943947002, guid: d57690862c97fdb4290fa0cbfc447277,
+    type: 2}
 --- !u!61 &919080276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4139,6 +4143,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   Direction: 4
+--- !u!114 &919080279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 919080271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3079e7e98fdcdb345bd51970c9bbae06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Faction: 1
 --- !u!1 &935365080
 GameObject:
   m_ObjectHideFlags: 0
