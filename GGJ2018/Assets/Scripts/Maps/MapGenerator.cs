@@ -73,15 +73,9 @@ public class MapGenerator : MonoBehaviour {
     void GenerateMap()
     {
         GenerateBase();
-       // CreateRoads();
+        // CreateRoads();
 
-        Vector3Int center = new Vector3Int(XSize / 2, YSize / 2, 0);
-        for (int idx = 1; idx < 10; idx++)
-        {
-            int x = idx * 10; 
-            var building = Buildings.ElementAt(Random.Range(0, Buildings.Count));
-            building.PrintBuilding(x, center.y);
-        }
+        GenerateBuildings(); 
 
     }
 
@@ -169,8 +163,78 @@ public class MapGenerator : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Generates a bunch of buildings. 
+    /// </summary>
+    void GenerateBuildings()
+    {
+        Vector2Int center = new Vector2Int(XSize / 2, YSize / 2);
+        int marketSize = 50; 
+        int left = center.x - Random.Range(0, marketSize / 2);
+        int right = center.x + Random.Range(0,marketSize / 2);
+        int up = center.y + Random.Range(0, marketSize / 2);
+        int down = center.y - Random.Range(0, marketSize / 2);
+        FillSpaceWithBuildings(new RectInt(left, down, right - left, up - down), "market");
+        List<Vector2Int> taken = new List<Vector2Int>(); 
+        for(int xdx = left; xdx < right; xdx ++)
+        {
+            for (int ydx = down; ydx < up; ydx++)
+            {
+                taken.Add(new Vector2Int(xdx, ydx)); 
+            }
+        }
 
+        FillSpaceWithBuildings(new RectInt(1, 1, XSize - 1, YSize - 1), "house", taken: taken); 
 
+    }
+
+    /// <summary>
+    /// Attempts to fill an area with buildings. 
+    /// </summary>
+    /// <param name="area"></param>
+    /// <param name="type"></param>
+    /// <param name="attempts"></param>
+    /// <param name="taken"></param>
+    void FillSpaceWithBuildings(RectInt area, string type, int attempts = 1000, List<Vector2Int> taken = null)
+    {
+        if (taken == null)
+            taken = new List<Vector2Int>();
+
+        var available = Buildings.Where(x => x.Type == type);
+        if (available.Count() < 1)
+            return; 
+
+        for (int idx = 0; idx < attempts; idx++)
+        {
+            int xTry = Random.Range(area.xMin, area.xMax);
+            int yTry = Random.Range(area.yMin, area.yMax);
+            var building = available.RandomElement();
+
+            bool intersected = false; 
+            var footprint = new List<Vector2Int>(); 
+            for (int xdx = xTry - 1; xdx <= xTry + building.Width + 1; xdx++)
+            {
+                for (int ydx = yTry - 1; ydx <= yTry + building.Height + 1; ydx++)
+                {
+                    var vect = new Vector2Int(xdx, ydx);
+                    if (taken.Contains(vect) || vect.x > area.xMax || vect.y > area.yMax)
+                    {
+                        intersected = true;
+                        break; 
+                    }
+
+                    footprint.Add(vect); 
+                }
+                if (intersected)
+                    break; 
+            }
+            if (intersected)
+                continue;
+
+            building.PrintBuilding(xTry, yTry);
+            taken.AddRange(footprint); 
+        }
+    }
 
     List<Vector3Int> RoadCores = new List<Vector3Int>(); 
 
