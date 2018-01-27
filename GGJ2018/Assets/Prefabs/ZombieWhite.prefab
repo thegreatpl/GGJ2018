@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4044868387628746}
   - component: {fileID: 212618090242390058}
-  - component: {fileID: 114689679028858638}
   - component: {fileID: 61938121634277806}
   - component: {fileID: 50078784355065116}
   - component: {fileID: 95111779379247612}
+  - component: {fileID: 114929015604219356}
   m_Layer: 0
   m_Name: ZombieWhite
   m_TagString: Untagged
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114689679028858638
+--- !u!114 &114929015604219356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,12 +114,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1462909968946030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b039b3fc48afe048beeb5e75b2e45c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4358e17ee45c5f14694b5072d4514e3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Horizontal: Horizontal
-  Vertical: Vertical
-  Fire: Fire1
+  Speed: 1
+  Direction: 4
 --- !u!212 &212618090242390058
 SpriteRenderer:
   m_ObjectHideFlags: 1

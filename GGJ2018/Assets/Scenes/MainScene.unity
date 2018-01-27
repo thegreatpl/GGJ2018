@@ -3982,6 +3982,7 @@ GameObject:
   - component: {fileID: 919080275}
   - component: {fileID: 919080276}
   - component: {fileID: 919080277}
+  - component: {fileID: 919080278}
   m_Layer: 0
   m_Name: WhitePlayer
   m_TagString: Untagged
@@ -4123,6 +4124,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &919080278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 919080271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4358e17ee45c5f14694b5072d4514e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  Direction: 4
 --- !u!1 &935365080
 GameObject:
   m_ObjectHideFlags: 0

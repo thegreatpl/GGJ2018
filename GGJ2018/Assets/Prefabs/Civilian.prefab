@@ -20,10 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4338437199546164}
   - component: {fileID: 212668698085080930}
-  - component: {fileID: 114361586806189306}
   - component: {fileID: 61962727345135920}
   - component: {fileID: 50533133245202728}
   - component: {fileID: 95899215105773378}
+  - component: {fileID: 114095674672573344}
+  - component: {fileID: 114504363908462056}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Untagged
@@ -106,7 +107,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114361586806189306
+--- !u!114 &114095674672573344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,12 +115,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1319485422419164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b039b3fc48afe048beeb5e75b2e45c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b9738d71f40e744d9d5b7c6ce3b8a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Horizontal: Horizontal
-  Vertical: Vertical
-  Fire: Fire1
+--- !u!114 &114504363908462056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1319485422419164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4358e17ee45c5f14694b5072d4514e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  Direction: 4
 --- !u!212 &212668698085080930
 SpriteRenderer:
   m_ObjectHideFlags: 1
