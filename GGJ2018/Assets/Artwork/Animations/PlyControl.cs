@@ -7,9 +7,11 @@ public class PlyControl : MonoBehaviour {
     public string Horizontal;
     public string Vertical;
     public string Fire;
-    Animator VisualControl;  
+
+    EntityMovement EntityMovement; 
+
 	void Start () {
-        VisualControl = gameObject.GetComponent<Animator>();
+        EntityMovement = gameObject.GetComponent<EntityMovement>();
 
     
     }
@@ -23,35 +25,27 @@ public class PlyControl : MonoBehaviour {
         
         if (moveX < 0)
         {
-            VisualControl.SetInteger("Direction", 3);
-            VisualControl.SetBool("Walk", true);
-            transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
+            EntityMovement.Direction = Direction.West; 
         }
 
         else if (moveX > 0)
         {
-            VisualControl.SetInteger("Direction", 4);
-            VisualControl.SetBool("Walk", true);
-            transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
+            EntityMovement.Direction = Direction.East;
         }
         
         else if (moveY < 0)
         {
-            VisualControl.SetInteger("Direction", 2);
-            VisualControl.SetBool("Walk", true);
-            transform.position += new Vector3(0, -1, 0) * Time.deltaTime;
+            EntityMovement.Direction = Direction.South; 
         }
 
         else if (moveY > 0)
         {
-            VisualControl.SetInteger("Direction", 1);
-            VisualControl.SetBool("Walk", true);
-            transform.position += new Vector3(0, 1, 0) * Time.deltaTime;
+            EntityMovement.Direction = Direction.North; 
         }
 
         else
         {
-            VisualControl.SetBool("Walk", false);
+            EntityMovement.Direction = Direction.None; 
         }
 
 
