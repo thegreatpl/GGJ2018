@@ -1834,6 +1834,23 @@ MonoBehaviour:
     type: 2}
   Players: []
   SpawnChance: 0.1
+  PControlls:
+  - PlayerNo: 1
+    Horizontal: Horizontal
+    Vertical: Vertical
+    Fire: Fire1
+  - PlayerNo: 2
+    Horizontal: Horizontal2
+    Vertical: Vertical2
+    Fire: Fire2
+  - PlayerNo: 3
+    Horizontal: Horizontal3
+    Vertical: Vertical3
+    Fire: Fire3
+  - PlayerNo: 4
+    Horizontal: Horizontal4
+    Vertical: Vertical4
+    Fire: Fire4
   MaxCivilians: 500
 --- !u!1 &599680025
 GameObject:
