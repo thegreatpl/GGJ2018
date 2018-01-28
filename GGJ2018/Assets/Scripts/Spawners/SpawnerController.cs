@@ -13,7 +13,7 @@ public class SpawnerController : MonoBehaviour {
     public List<TileBase> DoorTiles;
 
 
-    public List<GameObject> CivilianPrefabs;
+  //  public List<GameObject> CivilianPrefabs;
 
     public int CiviliansCount { get { return Civilians.Count; } }
 
@@ -23,7 +23,7 @@ public class SpawnerController : MonoBehaviour {
     /// <summary>
     /// Zombies list. 
     /// </summary>
-    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
+   // public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
 
     public int ZombiesCount { get { return LivingZombies.Count; } }
 
@@ -32,6 +32,20 @@ public class SpawnerController : MonoBehaviour {
     /// </summary>
     [HideInInspector]
     public List<GameObject> LivingZombies = new List<GameObject>();
+
+    /// <summary>
+    /// The different player animations. 
+    /// </summary>
+    public List<RuntimeAnimationControllerStore> Animations = new List<RuntimeAnimationControllerStore>();
+
+    /// <summary>
+    /// The player Prefab. 
+    /// </summary>
+    public GameObject PlayerPrefab;
+
+    public GameObject ZombiePrefab;
+
+    public GameObject CivilianPrefab; 
 
     /// <summary>
     /// List of living players. 
@@ -62,12 +76,13 @@ public class SpawnerController : MonoBehaviour {
 
 
 
-        if (CivilianPrefabs.Count < 1)
+        if (CivilianPrefab == null)
             return; 
 
         if (Random.value <= SpawnChance && Civilians.Count < MaxCivilians)
         {
-            SpawnObject(SpawnPoints.RandomElement(), CivilianPrefabs.RandomElement()); 
+            
+            SpawnObject(SpawnPoints.RandomElement(),CivilianPrefab, Animations.Where(x => x.Type == EntityType.Civilian).RandomElement().AnimatorController); 
         }
 	}
 
@@ -77,10 +92,16 @@ public class SpawnerController : MonoBehaviour {
     /// </summary>
     /// <param name="spawn"></param>
     /// <param name="prefab"></param>
-    public void SpawnObject(SpawnPoint spawn, GameObject prefab)
+    public void SpawnObject(SpawnPoint spawn, GameObject prefab, RuntimeAnimatorController controller = null)
     {
         var spawnLoc = MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation);
         var newObj = Instantiate(prefab, spawnLoc, prefab.transform.rotation);
+        if (controller != null)
+        {
+            newObj.GetComponent<EntityMovement>()?.SetAnimator(controller); 
+        }
+
+
         spawn.Spawn(newObj);
         Civilians.Add(newObj); 
     }
@@ -142,11 +163,43 @@ public class SpawnerController : MonoBehaviour {
     /// <param name="position"></param>
     public void SpawnZombie (int faction, Vector3 position)
     {
-        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
+        var zombie = Animations.Where(x => x.Type == EntityType.Zombie && x.Faction == faction).RandomElement();
 
-        var zom = Instantiate(zombie.Prefab, position, zombie.Prefab.transform.rotation);
+        var zom = Instantiate(ZombiePrefab, position, ZombiePrefab.transform.rotation);
         var owner = zom.GetComponent<EntityOwnership>();
         owner.Faction = faction;
+        zom.GetComponent<EntityMovement>()?.SetAnimator(zombie.AnimatorController); 
         LivingZombies.Add(zom); 
+    }
+
+    /// <summary>
+    /// Spawns in the players. 
+    /// </summary>
+    /// <param name="playerNo"></param>
+    public void SpawnPlayers(int playerNo)
+    {
+        for (int idx = 1; idx <= playerNo; idx++)
+        {
+            SpawnPlayer(playerNo); 
+        }
+        //insert camera stuff here? 
+    }
+
+    /// <summary>
+    /// Spawns in the players. 
+    /// </summary>
+    /// <param name="faction"></param>
+    void SpawnPlayer(int faction)
+    {
+        var animation = Animations.FirstOrDefault(x => x.Faction == faction);
+        if (animation == null)
+            throw new System.Exception($"Someone done fucked up and there is not a player animation for player {faction}"); 
+
+        var spawn = SpawnPoints.RandomElement();
+        var player = Instantiate(PlayerPrefab, spawn.SpawnLocation, PlayerPrefab.transform.rotation);
+        player.GetComponent<EntityMovement>()?.SetAnimator(animation.AnimatorController);
+        player.GetComponent<EntityOwnership>().Faction = faction;
+        Players.Add(player); 
+
     }
 }

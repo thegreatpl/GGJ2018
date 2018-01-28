@@ -19,8 +19,8 @@ public class EntityMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
-        VisualControl = gameObject.GetComponent<Animator>();
+        if (VisualControl == null)
+            VisualControl = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -70,4 +70,22 @@ public class EntityMovement : MonoBehaviour {
                 break;
         }
 	}
+
+    /// <summary>
+    /// Sets the animator on this entity. 
+    /// </summary>
+    /// <param name="animator"></param>
+    public void SetAnimator(RuntimeAnimatorController animator)
+    {
+        if (VisualControl == null)
+        {
+            VisualControl = GetComponent<Animator>();
+            if (VisualControl == null)
+                return; 
+        }
+
+        VisualControl.runtimeAnimatorController = animator;
+        VisualControl.SetInteger("Direction", 1);
+        VisualControl.SetBool("Walk", true);
+    }
 }

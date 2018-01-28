@@ -51,6 +51,7 @@ public class MapGenerator : MonoBehaviour {
 
         LoadBuildings(); 
         GenerateMap();
+        spawner.SpawnPlayers(1); 
 	}
 	
 	// Update is called once per frame
@@ -77,11 +78,18 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     void GenerateMap()
     {
-        GenerateBase();
-        // CreateRoads();
+        bool gen = true;
+        while (gen)
+        {
+            GenerateBase();
+            // CreateRoads();
 
-        GenerateBuildings();
-        spawner.FindDoorSpawns(); 
+            GenerateBuildings();
+            spawner.FindDoorSpawns();
+
+            if (spawner.SpawnPoints.Count > 0)
+                gen = false; 
+        }
     }
 
     /// <summary>
