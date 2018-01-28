@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class SpawnerController : MonoBehaviour {
@@ -61,7 +62,12 @@ public class SpawnerController : MonoBehaviour {
     public List<PlayerControls> PControlls = new List<PlayerControls>(); 
 
 
-    public int MaxCivilians = 500; 
+    public int MaxCivilians = 500;
+
+    /// <summary>
+    /// Which button resets the scene. 
+    /// </summary>
+    public string ReloadButton = "Reset"; 
 
 	// Use this for initialization
 	void Start () {
@@ -75,9 +81,9 @@ public class SpawnerController : MonoBehaviour {
         //Unity overloads the == operator so destroyed objects equal null. 
         LivingZombies.RemoveAll(x => x == null);
         Civilians.RemoveAll(x => x == null);
-        Players.RemoveAll(x => x == null); 
+        Players.RemoveAll(x => x == null);
 
-
+        CheckReload(); 
 
         if (CivilianPrefab == null)
             return; 
@@ -230,5 +236,22 @@ public class SpawnerController : MonoBehaviour {
         }
 
         return new Rect(0, 0, 0.1f, 0.1f);
+    }
+
+
+    public void CheckReload()
+    {
+        if (Input.GetButtonUp(ReloadButton) && Players.Count < 2)
+        {
+            Reload(); 
+        }
+    }
+
+    /// <summary>
+    /// Reloads the current scene. 
+    /// </summary>
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
     }
 }

@@ -1800,7 +1800,7 @@ MonoBehaviour:
     Type: 1
     AnimatorController: {fileID: 9100000, guid: 9060b8a895bcc174fb0f869a0c887116,
       type: 2}
-    Faction: 0
+    Faction: 2
     Weight: 0
   - Name: RedPlayer
     Type: 2
@@ -1852,6 +1852,7 @@ MonoBehaviour:
     Vertical: Vertical4
     Fire: Fire4
   MaxCivilians: 500
+  ReloadButton: Reset
 --- !u!1 &478079215
 GameObject:
   m_ObjectHideFlags: 0
