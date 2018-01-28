@@ -6,6 +6,8 @@ public class EntityMovement : MonoBehaviour {
 
     Animator VisualControl;
 
+
+
     /// <summary>
     /// The movement speed of this entity. 
     /// </summary>

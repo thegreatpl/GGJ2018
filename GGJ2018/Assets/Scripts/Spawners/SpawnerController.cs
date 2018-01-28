@@ -13,6 +13,8 @@ public class SpawnerController : MonoBehaviour {
 
     public List<TileBase> DoorTiles;
 
+    public GameObject SoundFXManager; 
+
 
   //  public List<GameObject> CivilianPrefabs;
 
@@ -78,7 +80,8 @@ public class SpawnerController : MonoBehaviour {
     void Start () {
         MapGenerator = GetComponent<MapGenerator>();
         InfectBulletScript.SpawnerController = this;
-        ZombieAI.SpawnerController = this;
+        BaseAI.SpawnerController = this;
+        //EntityMovement.SoundFXManager = SoundFXManager.GetComponent<SoundFXManager>(); 
 	}
 	
 	// Update is called once per frame

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Faction: 0
   Type: 1
-  HP: 5
+  MaxHP: 5
 --- !u!114 &114382168979111492
 MonoBehaviour:
   m_ObjectHideFlags: 1

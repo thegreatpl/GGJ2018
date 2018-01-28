@@ -53,6 +53,8 @@ public class ZombieAI : BaseAI {
             MoveToTarget(MapGenerator.Base.WorldToCell(Target.transform.position));
             Attack(); 
         }
+
+        //SoundFXManager.GamesSoundFXManager.PlaySound(SFXType.Zombie, transform.position); 
 	}
 
     /// <summary>
@@ -88,7 +90,7 @@ public class ZombieAI : BaseAI {
 
         foreach(var target in ordered)
         {
-            if (target.EntityOwnership.HP < 0)
+            if (target.EntityOwnership.CurrentHP < 0)
                 continue;
             //shouldn't happen, but might. 
             if (target.EntityOwnership.Faction == Ownership.Faction)
@@ -117,7 +119,7 @@ public class ZombieAI : BaseAI {
             return; 
         }
 
-        otherOwner.HP -= AttackVal;
+        otherOwner.TakeDamage(AttackVal);
         _attckCoolDown = CoolDownPeriod; 
     }
 }

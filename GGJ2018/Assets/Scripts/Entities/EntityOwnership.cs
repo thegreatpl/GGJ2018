@@ -14,17 +14,30 @@ public class EntityOwnership : MonoBehaviour {
     /// <summary>
     /// The HP of this entity. 
     /// </summary>
-    public int HP;
+    public int MaxHP;
+
+    public int CurrentHP { get; protected set; } 
+
+
 
 	// Use this for initialization
 	void Start () {
-		
+        CurrentHP = MaxHP; 
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //kills the entity. 
-        if (HP < 0)
+        if (CurrentHP < 0)
             Destroy(gameObject); 
 	}
+
+    public void TakeDamage(int amount)
+    {
+        CurrentHP -= amount;
+        if (Type == EntityType.Player)
+        {
+            SoundFXManager.GamesSoundFXManager.PlaySound(SFXType.Hit); 
+        }
+    }
 }

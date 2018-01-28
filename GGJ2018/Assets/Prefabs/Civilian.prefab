@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Faction: 0
   Type: 0
-  HP: 1
+  MaxHP: 1
 --- !u!212 &212668698085080930
 SpriteRenderer:
   m_ObjectHideFlags: 1

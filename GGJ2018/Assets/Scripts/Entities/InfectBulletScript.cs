@@ -57,7 +57,7 @@ public class InfectBulletScript : MonoBehaviour {
         }
         else if (owner.Faction != Faction)
         {
-            owner.HP -= Damage;
+            owner.TakeDamage(Damage);
             Destroy(gameObject); 
         }
         else
