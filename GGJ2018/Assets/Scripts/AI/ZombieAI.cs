@@ -26,6 +26,7 @@ public class ZombieAI : BaseAI {
 
     public float ChanceToHunt = 0.4f;
 
+    public int CoolDownPeriod = 10; 
 
     private int _attckCoolDown = 0; 
 
@@ -98,6 +99,9 @@ public class ZombieAI : BaseAI {
 
     protected void Attack()
     {
+        if (_attckCoolDown > 0)
+            return; 
+
         var distance = Vector3.Distance(transform.position, Target.transform.position);
 
         if (distance > AttackRadius)
@@ -110,6 +114,7 @@ public class ZombieAI : BaseAI {
             return; 
         }
 
-        otherOwner.HP -= AttackVal; 
+        otherOwner.HP -= AttackVal;
+        _attckCoolDown = CoolDownPeriod; 
     }
 }
