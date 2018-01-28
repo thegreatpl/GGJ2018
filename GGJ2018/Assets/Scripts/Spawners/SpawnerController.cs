@@ -85,7 +85,7 @@ public class SpawnerController : MonoBehaviour {
         if (Random.value <= SpawnChance && Civilians.Count < MaxCivilians)
         {
             
-            SpawnObject(SpawnPoints.RandomElement(),CivilianPrefab, Animations.Where(x => x.Type == EntityType.Civilian).RandomElement().AnimatorController); 
+            SpawnObject(SpawnPoints.RandomElement(), CivilianPrefab, Animations.Where(x => x.Type == EntityType.Civilian).RandomElement().AnimatorController); 
         }
 	}
 
@@ -201,7 +201,7 @@ public class SpawnerController : MonoBehaviour {
         var playercont = PControlls.FirstOrDefault(x => x.PlayerNo == faction); 
 
         var spawn = SpawnPoints.RandomElement();
-        var player = Instantiate(PlayerPrefab, spawn.SpawnLocation, PlayerPrefab.transform.rotation);
+        var player = Instantiate(PlayerPrefab, MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation), PlayerPrefab.transform.rotation);
         player.GetComponent<EntityMovement>()?.SetAnimator(animation.AnimatorController);
         player.GetComponent<EntityOwnership>().Faction = faction;
 
