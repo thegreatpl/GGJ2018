@@ -65,7 +65,9 @@ public class ZombieAI : BaseAI {
         //var targetListo = new List<GameObject>();
         //targetListo.AddRange(SpawnerController.Civilians);
         //targetListo.AddRange(SpawnerController.LivingZombies);
-        var targetList = Physics2D.OverlapCircleAll(transform.position, SightRange).Select(x => new TargetCheck(x.gameObject));
+        var targetList = Physics2D.OverlapCircleAll(transform.position, SightRange)
+            .Where(x => x.gameObject.HasComponent<EntityOwnership>())
+            .Select(x => new TargetCheck(x.gameObject));
 
         var ordered =
             Random.value < ChanceToGoForStrongest ? 

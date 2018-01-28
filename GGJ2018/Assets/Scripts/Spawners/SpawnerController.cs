@@ -45,7 +45,7 @@ public class SpawnerController : MonoBehaviour {
 	void Start () {
         MapGenerator = GetComponent<MapGenerator>();
         InfectBulletScript.SpawnerController = this;
-        ZombieAI.SpawnerController = this; 
+        ZombieAI.SpawnerController = this;
 	}
 	
 	// Update is called once per frame
@@ -124,10 +124,21 @@ public class SpawnerController : MonoBehaviour {
     /// <param name="civilian"></param>
     public void SpawnZombie(int faction, GameObject civilian)
     {
-        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
         var pos = civilian.transform.position;
         Destroy(civilian);
-        var zom = Instantiate(zombie.Prefab, pos, zombie.Prefab.transform.rotation);
+        SpawnZombie(faction, pos); 
+    }
+
+    /// <summary>
+    /// Spawns a zombie at the position given. 
+    /// </summary>
+    /// <param name="faction"></param>
+    /// <param name="position"></param>
+    public void SpawnZombie (int faction, Vector3 position)
+    {
+        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
+
+        var zom = Instantiate(zombie.Prefab, position, zombie.Prefab.transform.rotation);
         var owner = zom.GetComponent<EntityOwnership>();
         owner.Faction = faction;
         LivingZombies.Add(zom); 

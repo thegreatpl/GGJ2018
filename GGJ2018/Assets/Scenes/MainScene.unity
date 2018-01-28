@@ -1763,12 +1763,12 @@ MonoBehaviour:
   Zombies:
   - Faction: 1
     Prefab: {fileID: 1462909968946030, guid: 10dc13d747f04c948ac7cc7a3e3cffff, type: 2}
-  - Faction: 0
-    Prefab: {fileID: 0}
-  - Faction: 0
-    Prefab: {fileID: 0}
-  - Faction: 0
-    Prefab: {fileID: 0}
+  - Faction: 2
+    Prefab: {fileID: 1462909968946030, guid: 10dc13d747f04c948ac7cc7a3e3cffff, type: 2}
+  - Faction: 3
+    Prefab: {fileID: 1462909968946030, guid: 10dc13d747f04c948ac7cc7a3e3cffff, type: 2}
+  - Faction: 4
+    Prefab: {fileID: 1462909968946030, guid: 10dc13d747f04c948ac7cc7a3e3cffff, type: 2}
   LivingZombies: []
   SpawnChance: 0.1
   MaxCivilians: 500
@@ -1847,7 +1847,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 478079215}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9941809, y: 2.5614786, z: -9.699219}
+  m_LocalPosition: {x: 0, y: -0.03, z: -9.699219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 919080274}
@@ -4166,7 +4166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Faction: 1
   Type: 2
-  HP: 1
+  HP: 100
 --- !u!1 &935365080
 GameObject:
   m_ObjectHideFlags: 0

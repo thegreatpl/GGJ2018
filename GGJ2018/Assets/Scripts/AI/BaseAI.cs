@@ -93,7 +93,7 @@ public class BaseAI : MonoBehaviour {
     /// <returns></returns>
     protected bool TryMoveX(Vector3Int target)
     {
-        if (CurrentTile.x < target.x && Movement.Direction != Direction.West)
+        if (CurrentTile.x < target.x) // && Movement.Direction != Direction.West)
         {
             //move east. 
             if (Passable(CurrentTile.XAdd(1)))
@@ -102,7 +102,7 @@ public class BaseAI : MonoBehaviour {
                 return true;
             }
         }
-        else if (CurrentTile.x > target.x && Movement.Direction != Direction.East)
+        else if (CurrentTile.x > target.x) // && Movement.Direction != Direction.East)
         {
             //move west. 
             if (Passable(CurrentTile.XAdd(-1)))
@@ -120,7 +120,7 @@ public class BaseAI : MonoBehaviour {
     /// <returns></returns>
     protected bool TryMoveY(Vector3Int target)
     {
-        if (CurrentTile.y < target.y && Movement.Direction != Direction.South)
+        if (CurrentTile.y < target.y) // && Movement.Direction != Direction.South)
         {
             // move north.
             if (Passable(CurrentTile.YAdd(1)))
@@ -129,7 +129,7 @@ public class BaseAI : MonoBehaviour {
                 return true;
             }
         }
-        else if (CurrentTile.y > target.y && Movement.Direction != Direction.North)
+        else if (CurrentTile.y > target.y) // && Movement.Direction != Direction.North)
         {
             // move south. 
             if (Passable(CurrentTile.YAdd(-1)))

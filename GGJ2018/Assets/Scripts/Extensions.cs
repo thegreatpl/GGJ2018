@@ -81,5 +81,16 @@ public static class Extensions
                 throw new Exception("Someone fucked up with an unknown direction");
         }
     }
+
+    /// <summary>
+    /// Checks if a game object has a component. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static bool HasComponent<T>(this GameObject obj)
+    {
+        return obj.GetComponent<T>() != null; 
+    }
 }
 

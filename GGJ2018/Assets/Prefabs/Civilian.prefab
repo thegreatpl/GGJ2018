@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114095674672573344}
   - component: {fileID: 114504363908462056}
   - component: {fileID: 114833148903058532}
-  - component: {fileID: 58339842270987826}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Untagged
@@ -67,21 +66,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58339842270987826
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1319485422419164}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 7
 --- !u!61 &61962727345135920
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -137,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChangeDirectionChance: 0.1
   MoveChance: 0.05
-  SightRange: 0.7
+  SightRange: 7
 --- !u!114 &114504363908462056
 MonoBehaviour:
   m_ObjectHideFlags: 1
