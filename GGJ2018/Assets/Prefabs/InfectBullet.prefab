@@ -93,7 +93,7 @@ MonoBehaviour:
   Faction: 0
   Life: 200
   Damage: 1
-  BulletSpeed: 2
+  BulletSpeed: 4
 --- !u!114 &114231958723828560
 MonoBehaviour:
   m_ObjectHideFlags: 1
