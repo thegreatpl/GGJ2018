@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChangeDirectionChance: 0.2
   SightRange: 20
-  AttackRadius: 1.25
+  AttackRadius: 1.9
   ChanceToGoForStrongest: 0.3
   AttackVal: 1
   ChanceToHunt: 0.4

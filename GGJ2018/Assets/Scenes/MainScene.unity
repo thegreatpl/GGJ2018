@@ -1853,7 +1853,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1009ae158ad93234dbc88088a2101245, type: 2}
   - {fileID: 11400000, guid: bab041d9296420a4e82c1d1b956862f0, type: 2}
   - {fileID: 11400000, guid: 64cdab2c0de1af44fb3be817693285bc, type: 2}
-  SoundFXManager: {fileID: 2146974623}
   Civilians: []
   LivingZombies: []
   Animations:
@@ -10327,6 +10326,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ffabc298fbf214843b420087f5bd6ba1, type: 3}
   - {fileID: 8300000, guid: 3c9f48b6bfe46f64e8437373e33282c2, type: 3}
   - {fileID: 8300000, guid: 274a407827f4aa2438d1f11c72b12bfc, type: 3}
+  - {fileID: 8300000, guid: d0766ba00e397ae47b12457aa868c011, type: 3}
+  - {fileID: 8300000, guid: 7475433c7c166b84fbd5e356c504b75e, type: 3}
+  - {fileID: 8300000, guid: 519cc8702d3b67743ab78a20464f8019, type: 3}
+  - {fileID: 8300000, guid: cb38f3d03a0571a448d3277f38eb8753, type: 3}
+  - {fileID: 8300000, guid: 3a25418a9a7062245a33e2f4d51cd72c, type: 3}
 --- !u!4 &2146974626
 Transform:
   m_ObjectHideFlags: 0
