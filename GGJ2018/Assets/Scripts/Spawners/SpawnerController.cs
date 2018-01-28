@@ -67,10 +67,15 @@ public class SpawnerController : MonoBehaviour {
     /// <summary>
     /// Which button resets the scene. 
     /// </summary>
-    public string ReloadButton = "Reset"; 
+    public string ReloadButton = "Reset";
 
-	// Use this for initialization
-	void Start () {
+    /// <summary>
+    /// Return to main menu. 
+    /// </summary>
+    public string MainMenuButton = "Back"; 
+
+    // Use this for initialization
+    void Start () {
         MapGenerator = GetComponent<MapGenerator>();
         InfectBulletScript.SpawnerController = this;
         ZombieAI.SpawnerController = this;
@@ -244,6 +249,10 @@ public class SpawnerController : MonoBehaviour {
         if (Input.GetButtonUp(ReloadButton) && Players.Count < 2)
         {
             Reload(); 
+        }
+        else if (Input.GetButtonUp(MainMenuButton))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
