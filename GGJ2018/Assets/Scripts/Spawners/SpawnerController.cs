@@ -231,16 +231,16 @@ public class SpawnerController : MonoBehaviour {
         switch(plyNum)
         {
             case 1:
-                return new Rect(0 ,0.5f, 0.5f, 0.5f);
+                return new Rect(0 ,0.5f, 0.49f, 0.49f);
 
             case 2:
-                return new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+                return new Rect(0.5f, 0.5f, 0.49f, 0.49f);
 
             case 3:
-                return new Rect(0, 0, 0.5f, 0.5f);
+                return new Rect(0, 0, 0.49f, 0.49f);
 
             case 4:
-                return new Rect(0.5f, 0, 0.5f, 0.5f);
+                return new Rect(0.5f, 0, 0.49f, 0.49f);
         }
 
         return new Rect(0, 0, 0.1f, 0.1f);
