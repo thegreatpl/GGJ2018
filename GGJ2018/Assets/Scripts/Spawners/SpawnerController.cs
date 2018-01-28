@@ -31,7 +31,12 @@ public class SpawnerController : MonoBehaviour {
     /// List of all the zombies. 
     /// </summary>
     [HideInInspector]
-    public List<GameObject> LivingZombies = new List<GameObject>(); 
+    public List<GameObject> LivingZombies = new List<GameObject>();
+
+    /// <summary>
+    /// List of living players. 
+    /// </summary>
+    public List<GameObject> Players = new List<GameObject>(); 
 
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
@@ -52,7 +57,8 @@ public class SpawnerController : MonoBehaviour {
 	void Update () {
         //Unity overloads the == operator so destroyed objects equal null. 
         LivingZombies.RemoveAll(x => x == null);
-        Civilians.RemoveAll(x => x == null); 
+        Civilians.RemoveAll(x => x == null);
+        Players.RemoveAll(x => x == null); 
 
 
 

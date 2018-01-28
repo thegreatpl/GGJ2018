@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CivilianAI : BaseAI {
 
-    
 
     /// <summary>
     /// Chance to chose a target to more to, as opposed to just wandering randomly. 
@@ -13,6 +12,7 @@ public class CivilianAI : BaseAI {
     public float MoveChance = 0.05f;
 
     public float SightRange = 0.7f; 
+
 
 
     // Use this for initialization
@@ -46,9 +46,12 @@ public class CivilianAI : BaseAI {
 
     bool Flee()
     {
-        var view = Physics2D.OverlapCircleAll(transform.position, SightRange).Select(x => new TargetCheck(x.gameObject));
+        //var view = Physics2D.OverlapCircleAll(transform.position, SightRange).Select(x => new TargetCheck(x.gameObject));
 
-        var zombs = view.Where(x => x.EntityOwnership?.Type == EntityType.Zombie);
+        var zombs = SpawnerController.LivingZombies
+            .Where(x => Vector3.Distance(transform.position, x.transform.position) < SightRange)
+            .Select(x => new TargetCheck(x.gameObject)); 
+            //view.Where(x => x.EntityOwnership?.Type == EntityType.Zombie);
 
         if (zombs.Count() < 1)
             return false;

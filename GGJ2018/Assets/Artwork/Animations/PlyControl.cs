@@ -74,10 +74,12 @@ public class PlyControl : MonoBehaviour {
 
             var bullet = Instantiate(InfectBullet, transform.position.Direction(direct), transform.rotation);
             var bulletScript = bullet.GetComponent<InfectBulletScript>();
+            var bulletMove = bullet.GetComponent<EntityMovement>();
+            bulletMove.Direction = direct;
+            bulletMove.Speed = bulletScript.BulletSpeed; 
 
-
-            var vel = Vector3.zero.Direction(direct);
-            bulletScript.Velocity = new Vector3(vel.x * bulletScript.BulletSpeed, vel.y * bulletScript.BulletSpeed, 0);
+            //var vel = Vector3.zero.Direction(direct);
+            //bulletScript.Velocity = new Vector3(vel.x * bulletScript.BulletSpeed, vel.y * bulletScript.BulletSpeed, 0);
             bulletScript.Faction = Team.Faction;
            // Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 

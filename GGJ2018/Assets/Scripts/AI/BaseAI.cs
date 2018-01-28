@@ -6,6 +6,9 @@ public class BaseAI : MonoBehaviour {
 
     public static MapGenerator MapGenerator;
 
+    public static SpawnerController SpawnerController;
+
+
     protected EntityMovement Movement;
 
     protected Direction PreviousDirection = Direction.None;

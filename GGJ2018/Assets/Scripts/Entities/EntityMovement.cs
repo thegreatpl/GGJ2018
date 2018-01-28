@@ -21,7 +21,6 @@ public class EntityMovement : MonoBehaviour {
     void Start () {
 
         VisualControl = gameObject.GetComponent<Animator>();
-        Direction = Direction.None; 
 	}
 	
 	// Update is called once per frame
@@ -30,32 +29,44 @@ public class EntityMovement : MonoBehaviour {
         switch (Direction)
         {
             case Direction.West:
-                VisualControl.SetInteger("Direction", 3);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 3);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(-Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.East:
-
-                VisualControl.SetInteger("Direction", 4);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 4);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.South:
-                VisualControl.SetInteger("Direction", 2);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 2);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(0, -Speed, 0) * Time.deltaTime;
                 break;
 
             case Direction.North:
-                VisualControl.SetInteger("Direction", 1);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 1);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(0, Speed, 0) * Time.deltaTime;
                 break;
 
             default:
-                VisualControl.SetBool("Walk", false);
+                if (VisualControl != null)
+                    VisualControl.SetBool("Walk", false);
                 break;
         }
 	}

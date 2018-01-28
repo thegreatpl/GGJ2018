@@ -8,7 +8,7 @@ public class InfectBulletScript : MonoBehaviour {
     /// </summary>
     public static SpawnerController SpawnerController; 
 
-    public Vector3 Velocity = Vector3.zero;
+   // public Vector3 Velocity = Vector3.zero;
 
     public int Faction = 0; 
 
@@ -35,7 +35,7 @@ public class InfectBulletScript : MonoBehaviour {
         if (Life < 0)
             Destroy(gameObject);
 
-        transform.position += Velocity; 
+        //transform.position += Velocity; 
 
         Life--; 
 	}

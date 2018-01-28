@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ZombieAI : BaseAI {
 
-    public static SpawnerController SpawnerController;
 
     protected EntityOwnership Ownership; 
 
@@ -62,11 +61,13 @@ public class ZombieAI : BaseAI {
     /// <returns></returns>
     protected bool FindTarget()
     {
-        //var targetListo = new List<GameObject>();
-        //targetListo.AddRange(SpawnerController.Civilians);
-        //targetListo.AddRange(SpawnerController.LivingZombies);
-        var targetList = Physics2D.OverlapCircleAll(transform.position, SightRange)
-            .Where(x => x.gameObject.HasComponent<EntityOwnership>())
+        var targetListo = new List<GameObject>();
+        targetListo.AddRange(SpawnerController.Civilians);
+        targetListo.AddRange(SpawnerController.LivingZombies);
+        targetListo.AddRange(SpawnerController.Players); 
+        var targetList = targetListo
+        //Physics2D.OverlapCircleAll(transform.position, SightRange)
+        //    .Where(x => x.gameObject.HasComponent<EntityOwnership>())
             .Select(x => new TargetCheck(x.gameObject));
 
         var ordered =
