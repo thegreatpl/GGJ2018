@@ -21,7 +21,13 @@ public class ZombieAI : BaseAI {
 
     public float ChanceToGoForStrongest = 0.3f;
 
-    public int AttackVal = 1; 
+    public int AttackVal = 1;
+
+
+    public float ChanceToHunt = 0.4f;
+
+
+    private int _attckCoolDown = 0; 
 
 	// Use this for initialization
 	void Start () {
@@ -31,10 +37,12 @@ public class ZombieAI : BaseAI {
 
     // Update is called once per frame
     void Update () {
+        _attckCoolDown--; 
         CurrentTile = MapGenerator.Base.WorldToCell(transform.position);
         if (Target == null)
         {
-            if (FindTarget())
+
+            if (Random.value < ChanceToHunt && FindTarget())
                 return;
 
             Wander(); 
@@ -47,15 +55,16 @@ public class ZombieAI : BaseAI {
         }
 	}
 
-
+    /// <summary>
+    /// This finds a target for this zombie to hunt. 
+    /// </summary>
+    /// <returns></returns>
     protected bool FindTarget()
     {
-        var targetListo = new List<GameObject>();
-        targetListo.AddRange(SpawnerController.Civilians);
-        targetListo.AddRange(SpawnerController.LivingZombies);
-        var targetList = targetListo
-            .Select(x => new TargetCheck(x))
-            .ToList();
+        //var targetListo = new List<GameObject>();
+        //targetListo.AddRange(SpawnerController.Civilians);
+        //targetListo.AddRange(SpawnerController.LivingZombies);
+        var targetList = Physics2D.OverlapCircleAll(transform.position, SightRange).Select(x => new TargetCheck(x.gameObject));
 
         var ordered =
             Random.value < ChanceToGoForStrongest ? 
@@ -84,14 +93,7 @@ public class ZombieAI : BaseAI {
             Target = target.GameObject;
             return true; 
         }
-
-
         return false;  
-
-
-
-
-
     }
 
     protected void Attack()
