@@ -180,7 +180,7 @@ public class SpawnerController : MonoBehaviour {
     {
         for (int idx = 1; idx <= playerNo; idx++)
         {
-            SpawnPlayer(playerNo); 
+            SpawnPlayer(idx); 
         }
         //insert camera stuff here? 
     }
@@ -199,7 +199,31 @@ public class SpawnerController : MonoBehaviour {
         var player = Instantiate(PlayerPrefab, spawn.SpawnLocation, PlayerPrefab.transform.rotation);
         player.GetComponent<EntityMovement>()?.SetAnimator(animation.AnimatorController);
         player.GetComponent<EntityOwnership>().Faction = faction;
+
+        
+
+        player.GetComponentInChildren<Camera>().rect= GetCamRect(faction);
         Players.Add(player); 
 
+    }
+
+    private Rect GetCamRect (int plyNum)
+    {
+        switch(plyNum)
+        {
+            case 1:
+                return new Rect(0 ,0.5f, 0.5f, 0.5f);
+
+            case 2:
+                return new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+
+            case 3:
+                return new Rect(0, 0, 0.5f, 0.5f);
+
+            case 4:
+                return new Rect(0.5f, 0, 0.5f, 0.5f);
+        }
+
+        return new Rect(0, 0, 0.1f, 0.1f);
     }
 }

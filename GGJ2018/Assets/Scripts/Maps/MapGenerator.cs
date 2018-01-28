@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour {
 
         LoadBuildings(); 
         GenerateMap();
-        spawner.SpawnPlayers(1); 
+        spawner.SpawnPlayers(4); 
 	}
 	
 	// Update is called once per frame
