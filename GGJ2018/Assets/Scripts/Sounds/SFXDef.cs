@@ -21,5 +21,6 @@ public enum SFXType
     Zombie, 
     Hit, 
     Transform, 
+    Shoot, 
     NONE
 }

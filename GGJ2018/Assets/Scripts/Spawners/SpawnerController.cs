@@ -13,7 +13,6 @@ public class SpawnerController : MonoBehaviour {
 
     public List<TileBase> DoorTiles;
 
-    public GameObject SoundFXManager; 
 
 
   //  public List<GameObject> CivilianPrefabs;
@@ -186,7 +185,9 @@ public class SpawnerController : MonoBehaviour {
         var owner = zom.GetComponent<EntityOwnership>();
         owner.Faction = faction;
         zom.GetComponent<EntityMovement>()?.SetAnimator(zombie.AnimatorController); 
-        LivingZombies.Add(zom); 
+        LivingZombies.Add(zom);
+
+        SoundFXManager.GamesSoundFXManager.PlaySound(SFXType.Transform); 
     }
 
     /// <summary>

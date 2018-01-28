@@ -41,6 +41,8 @@ public class SoundFXManager : MonoBehaviour {
                 def.Type = SFXType.Transform;
             else if (def.Name.Contains("Hit"))
                 def.Type = SFXType.Hit;
+            else if (def.Name.Contains("Magic Shot"))
+                def.Type = SFXType.Shoot; 
             else
                 def.Type = SFXType.NONE; 
 
