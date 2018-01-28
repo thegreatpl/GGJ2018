@@ -86,4 +86,11 @@ public class PlyControl : MonoBehaviour {
         }
 
     }
+
+    public void ApplyPlayerControlls(PlayerControls controls)
+    {
+        Horizontal = controls.Horizontal;
+        Vertical = controls.Vertical;
+        Fire = controls.Fire; 
+    }
 }

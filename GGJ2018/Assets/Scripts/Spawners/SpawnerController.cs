@@ -58,6 +58,9 @@ public class SpawnerController : MonoBehaviour {
     public float SpawnChance = 0.1f;
 
 
+    public List<PlayerControls> PControlls = new List<PlayerControls>(); 
+
+
     public int MaxCivilians = 500; 
 
 	// Use this for initialization
@@ -193,14 +196,16 @@ public class SpawnerController : MonoBehaviour {
     {
         var animation = Animations.FirstOrDefault(x => x.Faction == faction);
         if (animation == null)
-            throw new System.Exception($"Someone done fucked up and there is not a player animation for player {faction}"); 
+            throw new System.Exception($"Someone done fucked up and there is not a player animation for player {faction}");
+
+        var playercont = PControlls.FirstOrDefault(x => x.PlayerNo == faction); 
 
         var spawn = SpawnPoints.RandomElement();
         var player = Instantiate(PlayerPrefab, spawn.SpawnLocation, PlayerPrefab.transform.rotation);
         player.GetComponent<EntityMovement>()?.SetAnimator(animation.AnimatorController);
         player.GetComponent<EntityOwnership>().Faction = faction;
 
-        
+        player.GetComponent<PlyControl>()?.ApplyPlayerControlls(playercont); 
 
         player.GetComponentInChildren<Camera>().rect= GetCamRect(faction);
         Players.Add(player); 
