@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9738d71f40e744d9d5b7c6ce3b8a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveChance: 0.05
   ChangeDirectionChance: 0.1
+  MoveChance: 0.05
+  SightRange: 7
 --- !u!114 &114504363908462056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Faction: 0
-  Type: Civilian
+  Type: 0
   HP: 1
 --- !u!212 &212668698085080930
 SpriteRenderer:

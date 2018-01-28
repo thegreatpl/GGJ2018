@@ -135,7 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChangeDirectionChance: 0.2
   SightRange: 20
+  AttackRadius: 1.25
   ChanceToGoForStrongest: 0.3
+  AttackVal: 1
+  ChanceToHunt: 0.4
+  CoolDownPeriod: 10
 --- !u!114 &114929015604219356
 MonoBehaviour:
   m_ObjectHideFlags: 1
