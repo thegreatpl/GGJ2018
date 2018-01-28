@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 212370718667478714}
   - component: {fileID: 58802086355934494}
   - component: {fileID: 114050404112687032}
+  - component: {fileID: 114231958723828560}
   m_Layer: 0
   m_Name: InfectBullet
   m_TagString: Untagged
@@ -89,11 +90,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0638678a697494b8e1cd3ef266e0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: {x: 0, y: 0, z: 0}
   Faction: 0
-  Life: 100
+  Life: 200
   Damage: 1
-  BulletSpeed: 0.05
+  BulletSpeed: 4
+--- !u!114 &114231958723828560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1847404943947002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4358e17ee45c5f14694b5072d4514e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  Direction: 0
 --- !u!212 &212370718667478714
 SpriteRenderer:
   m_ObjectHideFlags: 1

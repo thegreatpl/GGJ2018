@@ -19,9 +19,8 @@ public class EntityMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
-        VisualControl = gameObject.GetComponent<Animator>();
-        Direction = Direction.None; 
+        if (VisualControl == null)
+            VisualControl = gameObject.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -30,33 +29,63 @@ public class EntityMovement : MonoBehaviour {
         switch (Direction)
         {
             case Direction.West:
-                VisualControl.SetInteger("Direction", 3);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 3);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(-Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.East:
-
-                VisualControl.SetInteger("Direction", 4);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 4);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(Speed, 0, 0) * Time.deltaTime;
                 break;
 
             case Direction.South:
-                VisualControl.SetInteger("Direction", 2);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 2);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(0, -Speed, 0) * Time.deltaTime;
                 break;
 
             case Direction.North:
-                VisualControl.SetInteger("Direction", 1);
-                VisualControl.SetBool("Walk", true);
+                if (VisualControl != null)
+                {
+                    VisualControl.SetInteger("Direction", 1);
+                    VisualControl.SetBool("Walk", true);
+                }
                 transform.position += new Vector3(0, Speed, 0) * Time.deltaTime;
                 break;
 
             default:
-                VisualControl.SetBool("Walk", false);
+                if (VisualControl != null)
+                    VisualControl.SetBool("Walk", false);
                 break;
         }
 	}
+
+    /// <summary>
+    /// Sets the animator on this entity. 
+    /// </summary>
+    /// <param name="animator"></param>
+    public void SetAnimator(RuntimeAnimatorController animator)
+    {
+        if (VisualControl == null)
+        {
+            VisualControl = GetComponent<Animator>();
+            if (VisualControl == null)
+                return; 
+        }
+
+        VisualControl.runtimeAnimatorController = animator;
+        VisualControl.SetInteger("Direction", 1);
+        VisualControl.SetBool("Walk", true);
+    }
 }

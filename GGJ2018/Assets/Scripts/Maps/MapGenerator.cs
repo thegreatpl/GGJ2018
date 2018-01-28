@@ -12,9 +12,14 @@ public class MapGenerator : MonoBehaviour {
 
     public Tilemap Detail;
 
-
+    /// <summary>
+    /// X map size. 
+    /// </summary>
     public int XSize = 100;
 
+    /// <summary>
+    /// Y map size. 
+    /// </summary>
     public int YSize = 100;
 
     /// <summary>
@@ -35,9 +40,10 @@ public class MapGenerator : MonoBehaviour {
     public List<BuildingDef> BuildingDefs = new List<BuildingDef>();
 
 
-    public Dictionary<string, TileBase> WallTiles = new Dictionary<string, TileBase>(); 
 
-
+    /// <summary>
+    /// List of building blueprints. Call .Print on them to print at a position. 
+    /// </summary>
     List<Building> Buildings = new List<Building>();
 
     SpawnerController spawner; 
@@ -46,11 +52,12 @@ public class MapGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Building.MapGenerator = this;
-        CivilianAI.MapGenerator = this; 
+        BaseAI.MapGenerator = this; 
         spawner = GetComponent<SpawnerController>(); 
 
         LoadBuildings(); 
         GenerateMap();
+        spawner.SpawnPlayers(4); 
 	}
 	
 	// Update is called once per frame
@@ -58,6 +65,9 @@ public class MapGenerator : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Loads the buildings from the map. 
+    /// </summary>
     public void LoadBuildings()
     {
         foreach(var buildingDef in BuildingDefs)
@@ -77,11 +87,18 @@ public class MapGenerator : MonoBehaviour {
     /// </summary>
     void GenerateMap()
     {
-        GenerateBase();
-        // CreateRoads();
+        bool gen = true;
+        while (gen)
+        {
+            GenerateBase();
+            // CreateRoads();
 
-        GenerateBuildings();
-        spawner.FindDoorSpawns(); 
+            GenerateBuildings();
+            spawner.FindDoorSpawns();
+
+            if (spawner.SpawnPoints.Count > 0)
+                gen = false; 
+        }
     }
 
     /// <summary>
@@ -242,6 +259,9 @@ public class MapGenerator : MonoBehaviour {
     }
 
     List<Vector3Int> RoadCores = new List<Vector3Int>(); 
+
+
+
 
     /// <summary>
     /// Creates a bunch of roads. 

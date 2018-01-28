@@ -13,25 +13,52 @@ public class SpawnerController : MonoBehaviour {
     public List<TileBase> DoorTiles;
 
 
-    public List<GameObject> CivilianPrefabs;
+  //  public List<GameObject> CivilianPrefabs;
 
+    public int CiviliansCount { get { return Civilians.Count; } }
 
+    [HideInInspector]
     public List<GameObject> Civilians = new List<GameObject>();
 
     /// <summary>
     /// Zombies list. 
     /// </summary>
-    public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
+   // public List<ZombieSpawner> Zombies = new List<ZombieSpawner>();
+
+    public int ZombiesCount { get { return LivingZombies.Count; } }
 
     /// <summary>
     /// List of all the zombies. 
     /// </summary>
-    public List<GameObject> LivingZombies = new List<GameObject>(); 
+    [HideInInspector]
+    public List<GameObject> LivingZombies = new List<GameObject>();
+
+    /// <summary>
+    /// The different player animations. 
+    /// </summary>
+    public List<RuntimeAnimationControllerStore> Animations = new List<RuntimeAnimationControllerStore>();
+
+    /// <summary>
+    /// The player Prefab. 
+    /// </summary>
+    public GameObject PlayerPrefab;
+
+    public GameObject ZombiePrefab;
+
+    public GameObject CivilianPrefab; 
+
+    /// <summary>
+    /// List of living players. 
+    /// </summary>
+    public List<GameObject> Players = new List<GameObject>(); 
 
     /// <summary>
     /// Chance a civilian will be spawned in a tick. 
     /// </summary>
     public float SpawnChance = 0.1f;
+
+
+    public List<PlayerControls> PControlls = new List<PlayerControls>(); 
 
 
     public int MaxCivilians = 500; 
@@ -40,23 +67,25 @@ public class SpawnerController : MonoBehaviour {
 	void Start () {
         MapGenerator = GetComponent<MapGenerator>();
         InfectBulletScript.SpawnerController = this;
-        ZombieAI.SpawnerController = this; 
+        ZombieAI.SpawnerController = this;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //Unity overloads the == operator so destroyed objects equal null. 
         LivingZombies.RemoveAll(x => x == null);
-        Civilians.RemoveAll(x => x == null); 
+        Civilians.RemoveAll(x => x == null);
+        Players.RemoveAll(x => x == null); 
 
 
 
-        if (CivilianPrefabs.Count < 1)
+        if (CivilianPrefab == null)
             return; 
 
         if (Random.value <= SpawnChance && Civilians.Count < MaxCivilians)
         {
-            SpawnObject(SpawnPoints.RandomElement(), CivilianPrefabs.RandomElement()); 
+            
+            SpawnObject(SpawnPoints.RandomElement(), CivilianPrefab, Animations.Where(x => x.Type == EntityType.Civilian).RandomElement().AnimatorController); 
         }
 	}
 
@@ -66,10 +95,16 @@ public class SpawnerController : MonoBehaviour {
     /// </summary>
     /// <param name="spawn"></param>
     /// <param name="prefab"></param>
-    public void SpawnObject(SpawnPoint spawn, GameObject prefab)
+    public void SpawnObject(SpawnPoint spawn, GameObject prefab, RuntimeAnimatorController controller = null)
     {
         var spawnLoc = MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation);
         var newObj = Instantiate(prefab, spawnLoc, prefab.transform.rotation);
+        if (controller != null)
+        {
+            newObj.GetComponent<EntityMovement>()?.SetAnimator(controller); 
+        }
+
+
         spawn.Spawn(newObj);
         Civilians.Add(newObj); 
     }
@@ -119,12 +154,81 @@ public class SpawnerController : MonoBehaviour {
     /// <param name="civilian"></param>
     public void SpawnZombie(int faction, GameObject civilian)
     {
-        var zombie = Zombies.Where(x => x.Faction == faction).RandomElement();
         var pos = civilian.transform.position;
         Destroy(civilian);
-        var zom = Instantiate(zombie.Prefab, pos, zombie.Prefab.transform.rotation);
+        SpawnZombie(faction, pos); 
+    }
+
+    /// <summary>
+    /// Spawns a zombie at the position given. 
+    /// </summary>
+    /// <param name="faction"></param>
+    /// <param name="position"></param>
+    public void SpawnZombie (int faction, Vector3 position)
+    {
+        var zombie = Animations.Where(x => x.Type == EntityType.Zombie && x.Faction == faction).RandomElement();
+
+        var zom = Instantiate(ZombiePrefab, position, ZombiePrefab.transform.rotation);
         var owner = zom.GetComponent<EntityOwnership>();
         owner.Faction = faction;
+        zom.GetComponent<EntityMovement>()?.SetAnimator(zombie.AnimatorController); 
         LivingZombies.Add(zom); 
+    }
+
+    /// <summary>
+    /// Spawns in the players. 
+    /// </summary>
+    /// <param name="playerNo"></param>
+    public void SpawnPlayers(int playerNo)
+    {
+        for (int idx = 1; idx <= playerNo; idx++)
+        {
+            SpawnPlayer(idx); 
+        }
+        //insert camera stuff here? 
+    }
+
+    /// <summary>
+    /// Spawns in the players. 
+    /// </summary>
+    /// <param name="faction"></param>
+    void SpawnPlayer(int faction)
+    {
+        var animation = Animations.FirstOrDefault(x => x.Faction == faction);
+        if (animation == null)
+            throw new System.Exception($"Someone done fucked up and there is not a player animation for player {faction}");
+
+        var playercont = PControlls.FirstOrDefault(x => x.PlayerNo == faction); 
+
+        var spawn = SpawnPoints.RandomElement();
+        var player = Instantiate(PlayerPrefab, MapGenerator.Base.GetCellCenterWorld(spawn.SpawnLocation), PlayerPrefab.transform.rotation);
+        player.GetComponent<EntityMovement>()?.SetAnimator(animation.AnimatorController);
+        player.GetComponent<EntityOwnership>().Faction = faction;
+
+        player.GetComponent<PlyControl>()?.ApplyPlayerControlls(playercont); 
+
+        player.GetComponentInChildren<Camera>().rect= GetCamRect(faction);
+        Players.Add(player); 
+
+    }
+
+    private Rect GetCamRect (int plyNum)
+    {
+        switch(plyNum)
+        {
+            case 1:
+                return new Rect(0 ,0.5f, 0.5f, 0.5f);
+
+            case 2:
+                return new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+
+            case 3:
+                return new Rect(0, 0, 0.5f, 0.5f);
+
+            case 4:
+                return new Rect(0.5f, 0, 0.5f, 0.5f);
+        }
+
+        return new Rect(0, 0, 0.1f, 0.1f);
     }
 }

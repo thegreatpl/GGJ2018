@@ -6,6 +6,9 @@ public class BaseAI : MonoBehaviour {
 
     public static MapGenerator MapGenerator;
 
+    public static SpawnerController SpawnerController;
+
+
     protected EntityMovement Movement;
 
     protected Direction PreviousDirection = Direction.None;
@@ -93,7 +96,7 @@ public class BaseAI : MonoBehaviour {
     /// <returns></returns>
     protected bool TryMoveX(Vector3Int target)
     {
-        if (CurrentTile.x < target.x && Movement.Direction != Direction.West)
+        if (CurrentTile.x < target.x) // && Movement.Direction != Direction.West)
         {
             //move east. 
             if (Passable(CurrentTile.XAdd(1)))
@@ -102,7 +105,7 @@ public class BaseAI : MonoBehaviour {
                 return true;
             }
         }
-        else if (CurrentTile.x > target.x && Movement.Direction != Direction.East)
+        else if (CurrentTile.x > target.x) // && Movement.Direction != Direction.East)
         {
             //move west. 
             if (Passable(CurrentTile.XAdd(-1)))
@@ -120,7 +123,7 @@ public class BaseAI : MonoBehaviour {
     /// <returns></returns>
     protected bool TryMoveY(Vector3Int target)
     {
-        if (CurrentTile.y < target.y && Movement.Direction != Direction.South)
+        if (CurrentTile.y < target.y) // && Movement.Direction != Direction.South)
         {
             // move north.
             if (Passable(CurrentTile.YAdd(1)))
@@ -129,7 +132,7 @@ public class BaseAI : MonoBehaviour {
                 return true;
             }
         }
-        else if (CurrentTile.y > target.y && Movement.Direction != Direction.North)
+        else if (CurrentTile.y > target.y) // && Movement.Direction != Direction.North)
         {
             // move south. 
             if (Passable(CurrentTile.YAdd(-1)))
@@ -185,11 +188,65 @@ public class BaseAI : MonoBehaviour {
     }
 
     /// <summary>
-    /// Whether or not a tile is passable. 
+    /// Moves in the direction given. 
     /// </summary>
-    /// <param name="tilePos"></param>
-    /// <returns></returns>
-    protected bool Passable(Vector3Int tilePos)
+    /// <param name="direction"></param>
+    protected void MoveInDirection(Vector3 direction)
+    {
+        float xMovement, yMovement;
+        Direction xDirect, yDirect;
+        if (direction.x < 0)
+        {
+            xMovement = direction.x * -1;
+            xDirect = Direction.West;
+        }
+        else
+        {
+            xMovement = direction.x;
+            xDirect = Direction.East;
+        }
+
+        if (direction.y < 0)
+        {
+            yMovement = direction.y * -1;
+            yDirect = Direction.South;
+        }
+        else
+        {
+            yMovement = direction.y;
+            yDirect = Direction.North;
+        }
+
+        if (xMovement > yMovement && Passable(CurrentTile, xDirect))
+        { 
+            Movement.Direction = xDirect;
+            return; 
+        }
+        if (yMovement > xMovement && Passable(CurrentTile, yDirect))
+        {
+            Movement.Direction = yDirect;
+            return; 
+        }
+        if (yMovement == xMovement)
+        {
+            if (Random.value < 0.5f)
+                Movement.Direction = xDirect;
+            else
+                Movement.Direction = yDirect;
+
+            return; 
+        }
+
+        Wander(); 
+
+    }
+
+        /// <summary>
+        /// Whether or not a tile is passable. 
+        /// </summary>
+        /// <param name="tilePos"></param>
+        /// <returns></returns>
+        protected bool Passable(Vector3Int tilePos)
     {
         return !MapGenerator.Walls.HasTile(tilePos);
     }

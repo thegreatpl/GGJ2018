@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class ZombieAI : BaseAI {
 
-    public static SpawnerController SpawnerController;
 
     protected EntityOwnership Ownership; 
 
@@ -13,8 +12,22 @@ public class ZombieAI : BaseAI {
 
     public float SightRange = 20;
 
+    /// <summary>
+    /// How far away they have to be to attack them. 
+    /// </summary>
+    public float AttackRadius = 1f; 
 
-    public float ChanceToGoForStrongest = 0.3f; 
+
+    public float ChanceToGoForStrongest = 0.3f;
+
+    public int AttackVal = 1;
+
+
+    public float ChanceToHunt = 0.4f;
+
+    public int CoolDownPeriod = 10; 
+
+    private int _attckCoolDown = 0; 
 
 	// Use this for initialization
 	void Start () {
@@ -24,10 +37,12 @@ public class ZombieAI : BaseAI {
 
     // Update is called once per frame
     void Update () {
+        _attckCoolDown--; 
         CurrentTile = MapGenerator.Base.WorldToCell(transform.position);
         if (Target == null)
         {
-            if (FindTarget())
+
+            if (Random.value < ChanceToHunt && FindTarget())
                 return;
 
             Wander(); 
@@ -40,15 +55,20 @@ public class ZombieAI : BaseAI {
         }
 	}
 
-
+    /// <summary>
+    /// This finds a target for this zombie to hunt. 
+    /// </summary>
+    /// <returns></returns>
     protected bool FindTarget()
     {
         var targetListo = new List<GameObject>();
         targetListo.AddRange(SpawnerController.Civilians);
         targetListo.AddRange(SpawnerController.LivingZombies);
+        targetListo.AddRange(SpawnerController.Players); 
         var targetList = targetListo
-            .Select(x => new TargetCheck(x))
-            .ToList();
+        //Physics2D.OverlapCircleAll(transform.position, SightRange)
+        //    .Where(x => x.gameObject.HasComponent<EntityOwnership>())
+            .Select(x => new TargetCheck(x.gameObject));
 
         var ordered =
             Random.value < ChanceToGoForStrongest ? 
@@ -77,18 +97,27 @@ public class ZombieAI : BaseAI {
             Target = target.GameObject;
             return true; 
         }
-
-
         return false;  
-
-
-
-
-
     }
 
     protected void Attack()
     {
+        if (_attckCoolDown > 0)
+            return; 
 
+        var distance = Vector3.Distance(transform.position, Target.transform.position);
+
+        if (distance > AttackRadius)
+            return;
+
+        var otherOwner = Target.GetComponent<EntityOwnership>(); 
+        if (otherOwner.Type == EntityType.Civilian)
+        {
+            SpawnerController.SpawnZombie(Ownership.Faction, Target);
+            return; 
+        }
+
+        otherOwner.HP -= AttackVal;
+        _attckCoolDown = CoolDownPeriod; 
     }
 }
